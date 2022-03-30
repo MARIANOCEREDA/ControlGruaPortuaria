@@ -1,0 +1,9 @@
+Sensor de ángulo -> Para medición de ángulo entre carro y carga.Utilizado para acción de balanceo. Medición respecto a 
+la vertical.
+Sensores de apoyo de cada esquina del spreader sobre el contenedor (4 sensores) -> Determinan si las 4 trabajas 
+se encuentran activadas y por ende indican si el spreader esta apoyado sobre el contenedor y se pueden entonces activar
+las trabas.
+Sensor de Fw-> Indica la tensión en el cable y por ende puedo medir el peso de la carga.
+Sensores fines de carrera -> Indican los limites de movimiento del carro.
+Sensor de velocidad del izaje -> Puedo calcular \dot{l_h} 
+Sensor de velocidad del carro -> Puedo valcular \dot{x_t}

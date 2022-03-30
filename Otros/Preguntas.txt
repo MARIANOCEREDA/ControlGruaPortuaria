@@ -1,0 +1,2 @@
+Se cuenta con sensores para detectar las colisiones ?
+Con que otros sensores se cuenta ? Para medir velocidad de los motores?
