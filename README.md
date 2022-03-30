@@ -1,4 +1,4 @@
-# ControlGruaPortuaria
+# ControlGruaPortuaria -  Automatas y Control Discreto
 Desarrollo e implementación de un autómata híbrido de control y protección 
 para operación semi-automática coordinada en una grúa portacontenedores 
 portuaria de muelle tipo pórtico (Figura 1). Incluye 2 etapas:
