@@ -70,6 +70,8 @@ Kcy = 1.3e8;
 bcy = 1000;
 % - Horizontal friction [kN/(m/s)]
 bcx = 1000;
+% - Gravity
+g = 9.80665;
 
 
 
