@@ -38,6 +38,10 @@ dymax = 1.5;
 % - Aceleration limits[m/s2]
 ddymin = -1;
 ddymax = 1;
+% - Fixed height of trolley and hoisting system [m]
+yt0 = 45;
+% - Still beam [m]
+ysb = 45;
 % - Wire rope traction stiffness[kN/m]
 Kw = 1800;
 % - Drum radius[m]
@@ -60,6 +64,12 @@ Meqh = Mh + (Jmh*rth^2 + Jd)/Rd^2;
 % bd = 
 % - Mechanical friction of hoisting motor (to de defined)
 % bmh = 
+% - Vertical stiffnes (rigidez) [kN/m]
+Kcy = 1.3e8;
+% - Vertical friction [kN/(m/s)]
+bcy = 1000;
+% - Horizontal friction [kN/(m/s)]
+bcx = 1000;
 
 
 
