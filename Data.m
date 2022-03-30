@@ -21,8 +21,11 @@ Jw = 2.0;
 rt = 15/1;
 % Interia of motor + break [kg.m2]
 Jm = 10;
-% Mechanical friction [Nm/(rad/s)]
+% Equivalent Mechanical friction motor + trolley [Nm/(rad/s)]
 beq = 30;
+% - Equivalent mass of motor + trolley [kg.m2]
+Meq=mc+(Jw+Jm*rt^2)/Rw^2; 
+
 %% ##########################################
 % ############# Load Hoisting ###############
 % ###########################################
@@ -37,6 +40,8 @@ ddymin = -1;
 ddymax = 1;
 % - Wire rope traction stiffness[kN/m]
 Kw = 1800;
+% - Drum radius[m]
+Rd = 0.75;
 % - Internal friction of wire [kN/(m/s)];
 bw = 30;
 % - Primitive radius of drum[kh.m2]
@@ -45,11 +50,16 @@ Jd = 8.0;
 rth = 30/1;
 % - Interia of motor + break [kg.m2]
 Jmh = 30;
-% - Mechanical friction [Nm/(rad/s)]
+% - Equivalent Mechanical friction [Nm/(rad/s)]
 beqh = 18;
+% - Mass of point between wire and drum
+Mh = 0;
+% - Equivalent mass of motor + break + drum
+Meqh = Mh + (Jmh*rth^2 + Jd)/Rd^2;
 % - Mechanical friction of drum (to be defined)
 % bd = 
 % - Mechanical friction of hoisting motor (to de defined)
 % bmh = 
+
 
 
