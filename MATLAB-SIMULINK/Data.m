@@ -26,10 +26,9 @@ bt = 0;
 % - Equivalent rotation friction (motor + wheel): (bw + bm/r^2)
 beq_rot = 30;
 % Equivalent Mechanical friction motor +wheel + trolley [Nm/(rad/s)]
-beqt = bt + beq_rot*rt^2;
+beqt = bt + (beq_rot*rt^2)/(Rw^2);
 % - Equivalent mass of motor + trolley [kg.m2]
-Meqt=mt+(Jw+Jm*rt^2)/Rw^2; 
-
+Meqt=mt+(Jw+Jm*rt^2)/(Rw^2); 
 %% ##########################################
 % ############# Load Hoisting ###############
 % ###########################################
@@ -86,17 +85,28 @@ max_m = 50000;
 cont_mass = random_mass(min_m,max_m);
 
 %% ####################################
-% ####### Valores PID #################
+% ######### Trolley PID Gains #########
 % #####################################
 % - nt
 nt = 2.5;
 % - wpos
-w_pos = 10*beqt/Meqt;
+w_post = 10*beqt/Meqt;
 % - Ksat[]
-Ksat = Meqt*nt*w_pos^2;
+Ksat = Meqt*nt*w_post^2;
 % - bat[]
-bat = Meqt*nt*w_pos;
+bat = Meqt*nt*w_post;
 % - Ksia[]
-Ksiat = Meqt*w_pos^3;
-
-
+Ksiat = Meqt*w_post^3;
+%% ####################################
+% ######### Hoisting PID Gains ########
+% #####################################
+% - nh
+nh = 2.5;
+% - wpos
+w_posh = 10*beqh/Meqh;
+% - Ksat[]
+Ksah = Meqh*nh*w_posh^2;
+% - bat[]
+bah = Meqh*nh*w_posh;
+% - Ksia[]
+Ksiah = Meqh*w_posh^3;
