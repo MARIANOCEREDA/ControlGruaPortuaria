@@ -12,7 +12,7 @@ dxmax = 4;
 ddxmin = -1;
 ddxmax = 1;
 % - Trolley mass[kg]
-mt = 5000;
+mt = 50000;
 % - Wheel primitive radius[m]
 Rw = 0.5;
 % Intertia of wheels (slow shaft)[kg.m2]
@@ -21,10 +21,14 @@ Jw = 2.0;
 rt = 15/1;
 % Interia of motor + break [kg.m2]
 Jm = 10;
-% Equivalent Mechanical friction motor + trolley [Nm/(rad/s)]
-beq = 30;
+% - Trolley friction [Nms]
+bt = 0;
+% - Equivalent rotation friction (motor + wheel): (bw + bm/r^2)
+beq_rot = 30;
+% Equivalent Mechanical friction motor +wheel + trolley [Nm/(rad/s)]
+beqt = bt + beq_rot*rt^2;
 % - Equivalent mass of motor + trolley [kg.m2]
-Meq=mt+(Jw+Jm*rt^2)/Rw^2; 
+Meqt=mt+(Jw+Jm*rt^2)/Rw^2; 
 
 %% ##########################################
 % ############# Load Hoisting ###############
@@ -81,5 +85,18 @@ max_m = 50000;
 % - Random mass
 cont_mass = random_mass(min_m,max_m);
 
+%% ####################################
+% ####### Valores PID #################
+% #####################################
+% - nt
+nt = 2.5;
+% - wpos
+w_pos = 10*beqt/Meqt;
+% - Ksat[]
+Ksat = Meqt*nt*w_pos^2;
+% - bat[]
+bat = Meqt*nt*w_pos;
+% - Ksia[]
+Ksiat = Meqt*w_pos^3;
 
 
