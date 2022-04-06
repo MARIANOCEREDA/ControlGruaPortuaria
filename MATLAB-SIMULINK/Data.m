@@ -12,7 +12,7 @@ dxmax = 4;
 ddxmin = -1;
 ddxmax = 1;
 % - Trolley mass[kg]
-mc = 5000;
+mt = 5000;
 % - Wheel primitive radius[m]
 Rw = 0.5;
 % Intertia of wheels (slow shaft)[kg.m2]
@@ -24,7 +24,7 @@ Jm = 10;
 % Equivalent Mechanical friction motor + trolley [Nm/(rad/s)]
 beq = 30;
 % - Equivalent mass of motor + trolley [kg.m2]
-Meq=mc+(Jw+Jm*rt^2)/Rw^2; 
+Meq=mt+(Jw+Jm*rt^2)/Rw^2; 
 
 %% ##########################################
 % ############# Load Hoisting ###############
