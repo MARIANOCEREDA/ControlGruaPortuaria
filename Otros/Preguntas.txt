@@ -1,3 +1,5 @@
 Se cuenta con sensores para detectar las colisiones ?
 Con que otros sensores se cuenta ? Para medir velocidad de los motores?
 Que son los términos extra en las ecuaciones para carga apoyada ?
+Que valores debe tener bt ?
+Bequivalente de motor + rueda.
