@@ -42,8 +42,8 @@ ddymax = 1;
 yt0 = 45;
 % - Still beam [m]
 ysb = 45;
-% - Wire rope traction stiffness[kN/m]
-Kw = 1800;
+% - Wire rope traction stiffness[N/m]
+Kw = 1800e3;
 % - Drum radius[m]
 Rd = 0.75;
 % - Internal friction of wire [kN/(m/s)];
@@ -72,6 +72,14 @@ bcy = 1000;
 bcx = 1000;
 % - Gravity
 g = 9.80665;
+% - Spreader mass [kg]
+sp_mass = 1500;
+% - Minimum container mass[kg]
+min_m = 200;
+% - Maximum container mass[kg]
+max_m = 50000;
+% - Random mass
+cont_mass = random_mass(min_m,max_m);
 
 
 
