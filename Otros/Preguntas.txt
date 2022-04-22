@@ -7,3 +7,5 @@ Preguntar por ganancias del controlado Kp,Kd,.
 Valor que hay que darle a Wn.
 Ventajas de PD, PID.
 Se usa Meqt, o mt.
+El controlador de compensacion de ángulo debe operar en PARALELO con el 
+controlador de movimiento del carro?
