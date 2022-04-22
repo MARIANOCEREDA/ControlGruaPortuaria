@@ -11,3 +11,4 @@ El controlador de compensacion de ángulo debe operar en PARALELO con el
 controlador de movimiento del carro?
 Puedo medir l (longitud del cable)?
 Puedo medir xl (posicion en x de la carga)?
+Ciclos de operación - ciclo doble, pagina 4 de pdf de consignas.
