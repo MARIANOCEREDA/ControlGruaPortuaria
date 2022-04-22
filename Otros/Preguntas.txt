@@ -9,3 +9,5 @@ Ventajas de PD, PID.
 Se usa Meqt, o mt.
 El controlador de compensacion de ángulo debe operar en PARALELO con el 
 controlador de movimiento del carro?
+Puedo medir l (longitud del cable)?
+Puedo medir xl (posicion en x de la carga)?
