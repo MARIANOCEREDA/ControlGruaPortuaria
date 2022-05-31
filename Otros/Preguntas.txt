@@ -1,14 +1,10 @@
-Se cuenta con sensores para detectar las colisiones ?
-Con que otros sensores se cuenta ? Para medir velocidad de los motores?
-Que son los términos extra en las ecuaciones para carga apoyada ?
+Con que otros sensores se cuenta ? Para medir velocidad de los motores, velocidad del izaje y velocidad del carro? 
 Que valores debe tener bt ?
 Bequivalente de motor + rueda.
-Preguntar por ganancias del controlado Kp,Kd,.
-Valor que hay que darle a Wn.
+Valor que hay que darle a Wn (Definendo unos polos a lazo cerrado 10 veces mas rápidos que los de la planta original, deberian quedar definifod xita y wn).
 Ventajas de PD, PID.
-Se usa Meqt, o mt.
-El controlador de compensacion de ángulo debe operar en PARALELO con el 
-controlador de movimiento del carro?
+Se usa Meqt, o mt (control del ángulo de balanceo de carga).
+El controlador de compensacion de ángulo debe operar en PARALELO con el controlador de movimiento del carro? (concurrencia?)
 Puedo medir l (longitud del cable)?
 Puedo medir xl (posicion en x de la carga)?
 Ciclos de operación - ciclo doble, pagina 4 de pdf de consignas.
