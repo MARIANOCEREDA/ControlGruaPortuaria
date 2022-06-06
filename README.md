@@ -4,7 +4,7 @@ This is the repository for the Final Project of "Automata and Discrete Control" 
 
 *Topic:* Port crane control
 
-*Goal:* Development and implementation of a hybrid control and protection automaton for semi-automatic operation of a  for coordinated semi-automatic operation on a port gantry dock-mounted container crane port gantry-type quay crane (Figure 1).
+*Goal:* Development and implementation of a hybrid control and protection automation for semi-automatic operation for a coordinated semi-automatic operation on a port gantry dock-mounted container crane port gantry-type quay crane.
 
 ***Stages:*** 
 
