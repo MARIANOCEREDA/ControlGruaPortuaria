@@ -6,9 +6,9 @@ This is the repository for the Final Project of "Automata and Discrete Control" 
 
 *Goal:* Development and implementation of a hybrid control and protection automaton for semi-automatic operation of a  for coordinated semi-automatic operation on a port gantry dock-mounted container crane port gantry-type quay crane (Figure 1).
 
-*Stages:*
-    * A-) Design, conceptual modeling and performance analysis using Model-in-the-Loop (Stateflow - Simulink)  Model-in-the-Loop simulation (Stateflow - Simulink);
-    * B-) Implementation in an industrial industrial automaton programming environment according to IEC 61131 standard (CODESYS) and Software-in-the-Loop co-simulation (CODESYS - Simulink communicated via OPC UA).  via OPC UA).
+***Stages:***
+    *A-) Design, conceptual modeling and performance analysis using Model-in-the-Loop (Stateflow - Simulink)  Model-in-the-Loop simulation (Stateflow - Simulink);
+    *B-) Implementation in an industrial industrial automaton programming environment according to IEC 61131 standard (CODESYS) and Software-in-the-Loop co-simulation (CODESYS - Simulink communicated via OPC UA).  via OPC UA).
 
 ***
 
