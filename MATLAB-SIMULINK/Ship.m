@@ -19,8 +19,8 @@ classdef Ship
         %Genera aleatoriamente las alturas de cada columnas sobre el muelle
         %Se toma como punto 0 el muelle.
         function [h_cols] = load(obj,cnt)
-            rng('default')
-            h_cols = cnt.height + (obj.max_n_cnts*cnt.height-cnt.height)*rand(obj.n_cols,1);
+            rng('shuffle')
+            h_cols = cnt.height * randi([0,obj.max_n_cnts],obj.n_cols,1);
         end
         
         %Genera un array con los centros de cada columna de contenedores
@@ -28,12 +28,12 @@ classdef Ship
         function [centers] = allocate_centers(obj,step,delta)
             centers = [];
             for i=1:obj.n_cols
-                centers(1,i)= 2*step*i+delta;
+                centers(1,i)= 2*step*i+delta-step;
             end
         end
         
-        function plot_containers(obj,h_cols)
-            bar(1:obj.n_cols,h_cols);
+        function plot_containers(obj,h_cols,centers)
+            bar(centers,h_cols);
         end
         
         function print(obj)
