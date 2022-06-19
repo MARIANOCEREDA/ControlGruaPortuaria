@@ -64,6 +64,9 @@ switch (to_where)
             end
         end
         
+        disp(imax_left);
+        disp(imax_right);
+        
         
        %% Calculo de p3 y p2
        
