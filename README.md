@@ -4,7 +4,7 @@ This is the repository for the Final Project of "Automata and Discrete Control" 
 
 *Topic:* Port crane control system
 
-*Goal:* Development and implementation of a hybrid control and protection automation for semi-automatic operation for a coordinated semi-automatic operation on a port gantry dock-mounted container crane port gantry-type quay crane.
+*Goal:* Development and implementation of a hybrid control and protection automation for semi-automatic operation for a coordinated operation on a port gantry dock-mounted container crane.
 
 ***Stages:*** 
 
@@ -15,11 +15,11 @@ This is the repository for the Final Project of "Automata and Discrete Control" 
 
 ### Control Levels
 
-***Level 0: Safety and protection ->***  consists of a smaller and more reliable automaton, which must take control in case of critical failure and/or safety risk. take control in case of critical failure of lower levels and/or security risk.
+***Level 0: Safety and protection ->***  consists of a smaller and more reliable automaton, which must take control in case of critical failure and/or safety risk. 
 
-***Level 1: Global supervisory control ->*** Event-driven discrete-state, hierarchically structured and/or concurrency, for smooth and efficient operation with path coordination and optimization, global system operation control and diagnostics (alarms and faults). trajectories, global system operation control and diagnostics (alarms and faults).
+***Level 1: Global supervisory control ->*** Event-driven discrete-state, hierarchically structured and/or concurrency, for smooth and efficient operation with path coordination and optimization, global system operation control and diagnostics (alarms and faults).
 
-***Level 2: Motion Controllers ->*** Discrete-time continuous state controllers are responsible for receiving individual motion commands from the supervisory control for direct control of each of the main hoisting and translation motions. of the main hoisting and translation movements.
+***Level 2: Motion Controllers ->*** Discrete-time continuous state controllers are responsible for receiving individual motion commands from the supervisory control for direct control of each of the main hoisting and translation motions.
 
 ***
 
