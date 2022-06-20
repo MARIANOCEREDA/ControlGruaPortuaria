@@ -1,15 +1,15 @@
-# Automata and Discrete Control
+# Automata and Discrete Control - Port Crane Control System
 
 This is the repository for the Final Project of "Automata and Discrete Control" ‚
 
-*Topic:* Port crane control
+*Topic:* Port crane control system
 
 *Goal:* Development and implementation of a hybrid control and protection automation for semi-automatic operation for a coordinated semi-automatic operation on a port gantry dock-mounted container crane port gantry-type quay crane.
 
 ***Stages:*** 
 
 - A) Design, conceptual modeling and performance analysis using Model-in-the-Loop simulation (Stateflow - Simulink);
-- B) Implementation in an industrial industrial automaton programming environment according to IEC 61131 standard (CODESYS) and Software-in-the-Loop co-simulation (CODESYS - Simulink communicated via OPC UA).  via OPC UA).
+- B) Implementation in an industrial industrial automation programming environment according to IEC 61131 standard (CODESYS) and Software-in-the-Loop co-simulation (CODESYS - Simulink communicated via OPC UA).  via OPC UA).
 
 ***
 
