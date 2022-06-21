@@ -18,7 +18,7 @@ Rw = 0.5;
 % Intertia of wheels (slow shaft)[kg.m2]
 Jw = 2.0;
 % Reduction value
-rt = 15/1;
+rt = 15;
 % Interia of motor + break [kg.m2]
 Jm = 10;
 % - Trolley friction [Nms]
@@ -59,6 +59,8 @@ rth = 30/1;
 Jmh = 30;
 % - Equivalent Mechanical friction [Nm/(rad/s)]
 beqh = 18;
+bh = 0;
+beqhd = bh + ((beqh*(rth^2))/(Rd^2));
 % - Mass of point between wire and drum
 Mh = 0;
 % - Equivalent mass of motor + break + drum
