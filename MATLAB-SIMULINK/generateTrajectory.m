@@ -1,8 +1,10 @@
-function [] = generateTrajectory(init,weight,to_where)
+function [] = generateTrajectory(init,weight,to_where,cycle_type)
 
 init = 1;
 weight = 23562;
 to_where = 'to_dock';
+cycle_type = 'single';
+plt_traj = "true";
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
 if init
@@ -26,8 +28,6 @@ if init
     delta = 0; 
     cols_centers = find_cols_centers(c_width/2,delta,n_cols);
     
-    hold on
-    plot_containers(cols_height,cols_centers);
 end
 
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
@@ -58,6 +58,7 @@ for i=1:index_goal
     max=left_cols(i);
     end
 end
+
 %% Calculo de p3 y p2
 
 % Definimos la altura de seguridad que me definira la coord y de p3.
@@ -73,7 +74,7 @@ p3=[x_safe,h_safe];
 
 % Definimos p2 usando trigonometria.
 p2=[-20, p3(2)-tan(slope)*(p3(1)-p1(1))];
-plot([p2(1) p3(1)],[p2(2) p3(2)],'r')
+
 % Bucle que verifica que la trayectoria de p3 a p2 no con otra columna. Si esto ocurre, modificamos el valor de p3
 % y por ende de p2.
 e=0;
@@ -95,16 +96,12 @@ while next_index>0
         p3=[x_safe-e*c_width,h_safe];
         p2=[-20, p3(2)-tan(slope)*(p3(1)-p1(1))];
         next_index=imax_left;
-        disp('true')
-        plot([p2(1) p3(1)],[p2(2) p3(2)],'r')
    end
    next_index=next_index-1;
 end
-plot([p2(1) p3(1)],[p2(2) p3(2)],'r')
-plot([p2(1) p3(1)],[p2(2) p3(2)],'ko')
-plot(p6(1),p6(2),'bo')
 
-%%  calculo de p4 y p5
+
+%%  Calculo de p4 y p5
 
 % Si el contenedor tiene que ir a la primer columna, o tiene que ir
 % a un maximo el p4 y p5 en x seran igual al p6 x. En altura seran
@@ -123,8 +120,6 @@ p4=[x_safe,h_safe];
 
 % Definimos p5 usando trigonometria.
 p5=[p6(1), p4(2)+tan(slope)*(p4(1)-p6(1))];
-hold on
-plot([p4(1) p5(1)],[p4(2) p5(2)],'r') 
 % Bucle que verifica que la trayectoria de p4 a p5 no con otra
 % columna. Si esto ocurre, modificamos el valor de p4
 % y por ende de p5.
@@ -147,15 +142,12 @@ while next_index<=index_goal
         p4=[x_safe+e*c_width,h_safe];
         p5=[p6(1), p4(2)+tan(slope)*(p4(1)-p6(1))];
         next_index=imax_right;
-        disp('true2')
-        plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
    end
    next_index=next_index+1;
 end
 end
-plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
-plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
-       
+
+
 switch(to_where)    
     case 'to_ship' 
     % En este caso los puntos seran como se calcularon.
@@ -178,6 +170,19 @@ switch(to_where)
     p1=p6d;
    
 end % end switch
+
+%% Plot del perfil de trayectoria obtenido
+hold on
+if (plt_traj == "true")
+    plot_containers(cols_height,cols_centers);
+    plot(p1(1),p1(2),'ko')
+    plot([p2(1) p3(1)],[p2(2) p3(2)],'r')
+    plot([p2(1) p3(1)],[p2(2) p3(2)],'ko')
+    plot(p6(1),p6(2),'bo')
+    plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
+    plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
+end %endif
+
 end % end function
 
 
