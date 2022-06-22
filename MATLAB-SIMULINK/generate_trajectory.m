@@ -1,4 +1,4 @@
-function [] = generate_trajectory(init,weight,to_where,cycle_type)
+function [p1,p2,p3,p4,p5,p6,VT_MAX,VH_MAX,cols_height,cols_centers] = generate_trajectory(weight,to_where,cycle_type)
 
 init = 1;
 weight = 23562;
@@ -9,10 +9,14 @@ plt_traj = "true";
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
 if init
+    % Velocidades maximas a alcanzar por carro e izaje
+    VT_MAX=4; %[m/s]
+    VH_MAX=1.5; %[m/s]
+
     % Definimos dimensiones de un contendor maritimo [metros]
     C_HEIGHT = 2.89;
-    C_WEIGHT = weight;
     C_WIDTH = 2.438;
+    c_weight = weight;
 
     % Definimos dimensiones del barco (ship) [metros]
     S_WIDTH = 45;
@@ -31,8 +35,6 @@ if init
 end
 
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
-VT_MAX=4; %[m/s]
-VH_MAX=1.5; %[m/s]
 slope=atan(VH_MAX/VT_MAX); %pendiente
 
 % Definimos el punto de inicio (p1) en el muelle con coordenadas x,y
@@ -182,6 +184,9 @@ if (plt_traj == "true")
     plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
 end %endif
+
+points = [p1,p2,p3,p4,p5,p6];
+yc0xt = cols_height;
 
 end % end function
 
