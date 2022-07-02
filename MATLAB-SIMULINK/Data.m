@@ -6,8 +6,8 @@
 xmin = -30;
 xmax = 50;
 % - Speed limits[m/s]
-dxmin = -4;
-dxmax = 4;
+VT_MAX=4; %[m/s]
+VH_MAX=1.5; %[m/s]
 % - Aceleration limits[m/s2]
 ddxmin = -1;
 ddxmax = 1;
@@ -44,7 +44,7 @@ ddymax = 1;
 % - Fixed height of trolley and hoisting system [m]
 yt0 = 45;
 % - Still beam [m]
-ysb = 45;
+YSB = 15;
 % - Wire rope traction stiffness[N/m]
 Kw = 1800e3;
 % - Drum radius[m]

@@ -1,4 +1,4 @@
-function [p1,p2,p3,p4,p5,p6,VT_MAX,VH_MAX,cols_height,cols_centers] = generate_trajectory(weight,to_where,cycle_type)
+function [p0,p1,p2,p3,p4,p5,p6,p7,cols_height,cols_centers,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type)
 
 init = 1;
 weight = 23562;
@@ -12,6 +12,7 @@ if init
     % Velocidades maximas a alcanzar por carro e izaje
     VT_MAX=4; %[m/s]
     VH_MAX=1.5; %[m/s]
+    YSB=15;
 
     % Definimos dimensiones de un contendor maritimo [metros]
     C_HEIGHT = 2.89;
@@ -21,8 +22,8 @@ if init
     % Definimos dimensiones del barco (ship) [metros]
     S_WIDTH = 45;
     N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
-    MAX_C_OVER_DOCK= 15; % Cantidad maxima de containers sobre nivel del muelle
-    MAX_C_UNDER_DOCK = 5; % cantidad de containers por debajo del nivel del muelle [metros]
+    MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
+    MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
     
     % Generamos de forma aleatoria columnas con diferentes alturas.
     cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
@@ -38,12 +39,17 @@ end
 slope=atan(VH_MAX/VT_MAX); %pendiente
 
 % Definimos el punto de inicio (p1) en el muelle con coordenadas x,y
-p1=[-20,0];
+p0=[-20,0];
 
 % Generamos un numero aleatorio que nos dice a que numero de columna debemos llevar el contenedor. Definimos asi p6.
-index_goal=randi([1,N_COLS],1,1);
+while(1)
+    index_goal=randi([1,N_COLS],1,1);
+    if cols_height(index_goal)<C_HEIGHT*MAX_C_OVER_DOCK
+        break;
+    end
+end
 %index_goal=1;
-p6=[cols_centers(index_goal),cols_height(index_goal)];
+p7=[cols_centers(index_goal),cols_height(index_goal)];
 
 % Generamos un vector que solo contenga las columnas a la izquierda del punto objetivo. Son los unicos puntos que importan.
 left_cols=cols_height(1:index_goal);
@@ -65,17 +71,17 @@ end
 
 % Definimos la altura de seguridad que me definira la coord y de p3.
 % Se considera la altura de 2 contenedores para seguridad
-h_safe=max+2*C_HEIGHT;
+H_SAFE=max+2*C_HEIGHT;
 
 % Definimos el x de seguridad, que define la coord. x de p3
 % Se considera el ancho de un contenedor para seguridad
 x_safe=cols_centers(imax_left)-C_WIDTH;
 
 % Primer valor de p3, sin verificacion aun.
-p3=[x_safe,h_safe];
+p3=[x_safe,H_SAFE];
 
 % Definimos p2 usando trigonometria.
-p2=[-20, p3(2)-tan(slope)*(p3(1)-p1(1))];
+p2=[-20, p3(2)-tan(slope)*(p3(1)-p0(1))];
 
 % Bucle que verifica que la trayectoria de p3 a p2 no con otra columna. Si esto ocurre, modificamos el valor de p3
 % y por ende de p2.
@@ -95,8 +101,8 @@ while next_index>0
         % ende, p2. Para actualizar p3 se corre un ancho a la
         % izquierda el punto x de p3.
         e=e+1;
-        p3=[x_safe-e*C_WIDTH,h_safe];
-        p2=[-20, p3(2)-tan(slope)*(p3(1)-p1(1))];
+        p3=[x_safe-e*C_WIDTH,H_SAFE];
+        p2=[-20, p3(2)-tan(slope)*(p3(1)-p0(1))];
         next_index=imax_left;
    end
    next_index=next_index-1;
@@ -109,7 +115,7 @@ end
 % a un maximo el p4 y p5 en x seran igual al p6 x. En altura seran
 %la altura de seguridad
 if (index_goal ==1 || max==left_cols(index_goal))
-    p4=[p6(1), h_safe];
+    p4=[p7(1),H_SAFE];
     p5=p4;
 
 else
@@ -118,10 +124,10 @@ else
     x_safe=cols_centers(imax_right)+C_WIDTH;
 
     % Primer valor de p4, sin verificacion aun.
-    p4=[x_safe,h_safe];
+    p4=[x_safe,H_SAFE];
 
     % Definimos p5 usando trigonometria.
-    p5=[p6(1), p4(2)+tan(slope)*(p4(1)-p6(1))];
+    p5=[p7(1), p4(2)+tan(slope)*(p4(1)-p7(1))];
     % Bucle que verifica que la trayectoria de p4 a p5 no con otra
     % columna. Si esto ocurre, modificamos el valor de p4
     % y por ende de p5.
@@ -141,14 +147,16 @@ else
             % ende, p5. Para actualizar p4 se corre un ancho a la
             % derecha el punto x de p4.
             e=e+1;
-            p4=[x_safe+e*C_WIDTH,h_safe];
-            p5=[p6(1), p4(2)+tan(slope)*(p4(1)-p6(1))];
+            p4=[x_safe+e*C_WIDTH,H_SAFE];
+            p5=[p7(1), p4(2)+tan(slope)*(p4(1)-p7(1))];
             next_index=imax_right;
        end
        next_index=next_index+1;
     end
 end
 
+p1 = [p0(1),(p2(2)-p0(2))/2];
+p6 = [p7(1),(p5(2)-p7(2))/2+p7(2)];
 
 switch(to_where)    
     case 'to_ship' 
@@ -158,18 +166,22 @@ switch(to_where)
     % En este caso se invierten los puntos, el p1 sera aleatorio y el p6
     % será un punto fijo en (-20,0). Primero guardamos los puntos en puntos
     % auxiliares y luego se actualizan.
+    p0d=p0;
     p1d=p1;
     p2d=p2;
     p3d=p3;
     p4d=p4;
     p5d=p5;
     p6d=p6;
+    p7d=p7;
+    p7=p7d;
     p6=p1d;
     p5=p2d;
     p4=p3d;
     p3=p4d;
     p2=p5d;
     p1=p6d;
+    p0=p0d;
    
 end % end switch
 
@@ -177,15 +189,17 @@ end % end switch
 hold on
 if (plt_traj == "true")
     plot_containers(cols_height,cols_centers);
+    plot(p0(1),p0(2),'ko')
     plot(p1(1),p1(2),'ko')
     plot([p2(1) p3(1)],[p2(2) p3(2)],'r')
     plot([p2(1) p3(1)],[p2(2) p3(2)],'ko')
-    plot(p6(1),p6(2),'bo')
+    plot(p6(1),p6(2),'ko')
+    plot(p7(1),p7(2),'bo')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
 end %endif
 
-points = [p1,p2,p3,p4,p5,p6];
+points = [p0,p1,p2,p3,p4,p5,p6,p7];
 yc0xt = cols_height;
 
 end % end function
