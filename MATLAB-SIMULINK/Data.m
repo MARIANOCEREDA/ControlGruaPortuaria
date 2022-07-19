@@ -13,7 +13,7 @@ TO_WHERE="to_dock";
 CYCLE_TYPE="single";
 cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
 cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
-
+plot_containers(cols_height,cols_centers);
 %% ##########################################
 % ######## Trolley translation ##############
 % ###########################################
@@ -123,7 +123,7 @@ Ksiat = Meqt*w_post^3;
 % - nh
 nh = 2.5;
 % - wpos
-w_posh = 10*beqh/Meqh;
+w_posh = 10*beqhd/Meqh;
 % - Ksat[]
 Ksah = Meqh*nh*w_posh^2;
 % - bat[]
