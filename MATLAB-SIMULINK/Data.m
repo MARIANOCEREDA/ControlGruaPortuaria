@@ -1,4 +1,19 @@
 
+%% #####################################
+% ######## DATOS CONTAINER Y BARCO ####
+% #####################################
+C_HEIGHT = 2.89;
+C_WIDTH = 2.438;
+S_WIDTH = 45;
+N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
+MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
+MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
+delta = 0; 
+TO_WHERE="to_dock";
+CYCLE_TYPE="single";
+cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
+cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
+
 %% ##########################################
 % ######## Trolley translation ##############
 % ###########################################
@@ -28,7 +43,7 @@ beq_rot = 30;
 % Equivalent Mechanical friction motor +wheel + trolley [Nm/(rad/s)]
 beqt = bt + (beq_rot*rt^2)/(Rw^2);
 % - Equivalent mass of motor + trolley [kg.m2]
-Meqt=mt+(Jw+Jm*rt^2)/(Rw^2); 
+Meqt = mt + (Jw+Jm*rt^2)/(Rw^2); 
 %% ##########################################
 % ############# Load Hoisting ###############
 % ###########################################
@@ -43,6 +58,7 @@ ddymin = -1;
 ddymax = 1;
 % - Fixed height of trolley and hoisting system [m]
 yt0 = 45;
+lh0 = yt0 - C_HEIGHT;
 % - Still beam [m]
 YSB = 15;
 % - Wire rope traction stiffness[N/m]
@@ -50,7 +66,9 @@ Kw = 1800e3;
 % - Drum radius[m]
 Rd = 0.75;
 % - Internal friction of wire [kN/(m/s)];
-bw = 30;
+bw = 30000; %Sgun proyecto cordobes
+% - Fixed starting point (initial condition of integrator)
+xt0 = -20;
 % - Primitive radius of drum[kh.m2]
 Jd = 8.0;
 % - Reduction
@@ -70,9 +88,9 @@ Meqh = Mh + (Jmh*rth^2 + Jd)/Rd^2;
 % - Mechanical friction of hoisting motor (to de defined)
 % bmh = 
 % - Vertical stiffnes (rigidez) [kN/m]
-Kcy = 1.3e8;
+Kcy = 1.3e6; %1.3e8 segun PDF, 1.3e6 segun crodobes
 % - Vertical friction [kN/(m/s)]
-bcy = 1000;
+bcy = 500; %1000 segund PDF , 500 SEGUN CORDOBES
 % - Horizontal friction [kN/(m/s)]
 bcx = 1000;
 % - Gravity
