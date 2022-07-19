@@ -123,7 +123,7 @@ Ksiat = Meqt*w_post^3;
 % - nh
 nh = 2.5;
 % - wpos
-w_posh = 10*beqh/Meqh;
+w_posh = 10*beqhd/Meqh;
 % - Ksat[]
 Ksah = Meqh*nh*w_posh^2;
 % - bat[]
