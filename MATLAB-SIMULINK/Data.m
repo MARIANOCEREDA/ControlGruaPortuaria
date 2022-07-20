@@ -99,7 +99,7 @@ bcx = 1000;
 % - Gravity
 g = 9.80665;
 % - Spreader mass [kg]
-sp_mass = 1500;
+sp_mass = 15000;
 % - Minimum container mass[kg]
 min_m = 200;
 % - Maximum container mass[kg]
