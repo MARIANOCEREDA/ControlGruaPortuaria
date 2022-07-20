@@ -104,6 +104,8 @@ sp_mass = 15000;
 min_m = 200;
 % - Maximum container mass[kg]
 max_m = 50000;
+% - Maximun charge mass [kg]
+ml_max=max_m+sp_mass;
 % - Random mass
 cont_mass = random_mass(min_m,max_m);
 
@@ -133,7 +135,19 @@ Ksah = Meqh*nh*w_posh^2;
 bah = Meqh*nh*w_posh;
 % - Ksia[]
 Ksiah = Meqh*w_posh^3;
-
+%% ####################################
+% ######### Balance PD Gains ########
+% #####################################
+    Ba_b   = zeros(1,60); Ksa_b  = zeros(1,60);
+    for lh=1:1:60
+        G = tf([-(mt+ml_max) 0],[(Meqt+ml_max)*lh 0 Meqt]);
+        polos     = roots(G.den{1});
+        modulo    = abs(polos(1));
+        omegaPos  = modulo*10;
+        mEq       = -(Meqt+ml_max)*lh/(mt+ml_max);
+        Ba_b(lh)  = mEq*3*omegaPos;
+        Ksa_b(lh) = mEq*3*omegaPos*omegaPos;
+    end
 %% #############################
 % #### FRECUENCIAS MOD TORQUE ##
 % #############################
