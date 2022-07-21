@@ -62,7 +62,6 @@ ddymin = -1;
 ddymax = 1;
 % - Fixed height of trolley and hoisting system [m]
 yt0 = 45.0;
-lh0 = yt0 - C_HEIGHT;
 % - Still beam [m]
 YSB = 15.0;
 % - Wire rope traction stiffness[N/m]
@@ -101,6 +100,7 @@ bcx = 1000.0;
 g = 9.80665;
 % - Spreader mass [kg]
 sp_mass = 15000.0;
+lh0 = yt0 - C_HEIGHT - 5 -(sp_mass * g) / Kw;
 % - Minimum container mass[kg] -> Empty container
 min_m = 2000.0;
 % - Maximum container mass[kg]
@@ -141,3 +141,6 @@ Ksiah = Meqh*w_posh^3;
 % #############################
 w_mt_i = 1000;
 w_mt_h = 1000;
+G = tf([-(mt+cont_mass) 0],[(Meqt+cont_mass)*1 0 Meqt])
+polos  = roots(G.den{1})
+modulo = abs(polos(1))
