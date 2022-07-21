@@ -101,7 +101,7 @@ bcx = 1000.0;
 g = 9.80665;
 % - Spreader mass [kg]
 sp_mass = 15000.0;
-% - Minimum container mass[kg]
+% - Minimum container mass[kg] -> Empty container
 min_m = 2000.0;
 % - Maximum container mass[kg]
 max_m = 50000.0;
@@ -118,11 +118,11 @@ nt = 2.5;
 % - wpos
 w_post = 10*beqt/Meqt;
 % - Ksat[]
-Ksat = Meqt*nt*w_post^2
+Ksat = Meqt*nt*w_post^2;
 % - bat[]
-bat = Meqt*nt*w_post
+bat = Meqt*nt*w_post;
 % - Ksia[]
-Ksiat = Meqt*w_post^3
+Ksiat = Meqt*w_post^3;
 %% ####################################
 % ######### Hoisting PID Gains ########
 % #####################################
@@ -131,11 +131,11 @@ nh = 2.5;
 % - wpos
 w_posh = 10*beqhd/Meqh;
 % - Ksat[]
-Ksah = Meqh*nh*w_posh^2
+Ksah = Meqh*nh*w_posh^2;
 % - bat[]
-bah = Meqh*nh*w_posh
+bah = Meqh*nh*w_posh;
 % - Ksia[]
-Ksiah = Meqh*w_posh^3
+Ksiah = Meqh*w_posh^3;
 %% #############################
 % #### FRECUENCIAS MOD TORQUE ##
 % #############################
