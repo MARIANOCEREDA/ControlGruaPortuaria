@@ -1,4 +1,4 @@
-function [p0,p1,p2,p3,p4,p5,p6,p7,cols_height,cols_centers,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type)
+function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
 
 init = 1;
 weight = 23562;
@@ -26,12 +26,12 @@ if init
     MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
     
     % Generamos de forma aleatoria columnas con diferentes alturas.
-    cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
+    %cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
     
     %Generamos array que contiene los centros de cada columna respecto al
     %muelle (punto 0,0)
-    delta = 0; 
-    cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
+    %delta = 0; 
+    %cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
     
 end
 

@@ -108,7 +108,7 @@ max_m = 50000.0;
 % - Maximun charge mass [kg]
 ml_max=max_m+sp_mass;
 % - Random mass
-%cont_mass = %random_mass(min_m,max_m);
+%cont_mass = random_mass(min_m,max_m);
 cont_mass = max_m;
 %% ####################################
 % ######### Trolley PID Gains #########
@@ -141,6 +141,7 @@ Ksiah = Meqh*w_posh^3;
 % #############################
 w_mt_i = 1000;
 w_mt_h = 1000;
-G = tf([-(mt+cont_mass) 0],[(Meqt+cont_mass)*1 0 Meqt])
-polos  = roots(G.den{1})
-modulo = abs(polos(1))
+%% #########################################
+% ## GENERACION DE PUNTOS DE TRAYECTORIA ###
+% ##########################################
+
