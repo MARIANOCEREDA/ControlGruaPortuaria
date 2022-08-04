@@ -1,39 +1,38 @@
-function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
+%function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
 
 init = 1;
 weight = 23562;
-to_where = 'to_dock';
+to_where = 'to_ship';
 cycle_type = 'single';
 plt_traj = "true";
 
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
-if init
+
     % Velocidades maximas a alcanzar por carro e izaje
     VT_MAX=4; %[m/s]
     VH_MAX=1.5; %[m/s]
     YSB=15;
 
-    % Definimos dimensiones de un contendor maritimo [metros]
-    C_HEIGHT = 2.89;
-    C_WIDTH = 2.438;
-    c_weight = weight;
+% Definimos dimensiones de un contendor maritimo [metros]
+C_HEIGHT = 2.89;
+C_WIDTH = 2.5;
+c_weight = weight;
 
-    % Definimos dimensiones del barco (ship) [metros]
-    S_WIDTH = 45;
-    N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
-    MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
-    MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
+% Definimos dimensiones del barco (ship) [metros]
+S_WIDTH = 45;
+N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
+MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
+MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
+
+% Generamos de forma aleatoria columnas con diferentes alturas.
+%cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
+
+%Generamos array que contiene los centros de cada columna respecto al
+%muelle (punto 0,0)
+%delta = 0; 
+%cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
     
-    % Generamos de forma aleatoria columnas con diferentes alturas.
-    %cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
-    
-    %Generamos array que contiene los centros de cada columna respecto al
-    %muelle (punto 0,0)
-    %delta = 0; 
-    %cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
-    
-end
 
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
 slope=atan(VH_MAX/VT_MAX); %pendiente
@@ -43,7 +42,8 @@ p0=[-20,0];
 
 % Generamos un numero aleatorio que nos dice a que numero de columna debemos llevar el contenedor. Definimos asi p6.
 while(1)
-    index_goal=randi([1,N_COLS],1,1);
+    %index_goal=randi([1,N_COLS],1,1);
+    index_goal = 9;
     if cols_height(index_goal)<C_HEIGHT*MAX_C_OVER_DOCK
         break;
     end
@@ -202,7 +202,7 @@ end %endif
 points = [p0,p1,p2,p3,p4,p5,p6,p7];
 yc0xt = cols_height;
 
-end % end function
+%end % end function
 
 
 

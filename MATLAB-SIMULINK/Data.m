@@ -16,7 +16,7 @@ TO_WHERE="to_dock";
 CYCLE_TYPE="single";
 %cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
 %cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
-cols_centers = [5,10,15, 20,25, 30,35,40,45];
+cols_centers = [5,10,15, 20,25,30,35,40,45];
 cols_height = [34,34,19,19,35,30,35,30,23];
 plot_containers(cols_height,cols_centers);
 %% ##########################################
