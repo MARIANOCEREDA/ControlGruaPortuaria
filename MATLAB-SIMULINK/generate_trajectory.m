@@ -9,10 +9,10 @@ plt_traj = "true";
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
 
-    % Velocidades maximas a alcanzar por carro e izaje
-    VT_MAX=4; %[m/s]
-    VH_MAX=1.5; %[m/s]
-    YSB=15;
+% Velocidades maximas a alcanzar por carro e izaje
+VT_MAX=4; %[m/s]
+VH_MAX=1.5; %[m/s]
+YSB=15;
 
 % Definimos dimensiones de un contendor maritimo [metros]
 C_HEIGHT = 2.89;
