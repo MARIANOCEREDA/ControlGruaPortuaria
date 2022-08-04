@@ -1,6 +1,5 @@
 %function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
 
-init = 1;
 weight = 23562;
 to_where = 'to_ship';
 cycle_type = 'single';
@@ -199,7 +198,14 @@ if (plt_traj == "true")
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
 end %endif
 
-points = [p0,p1,p2,p3,p4,p5,p6,p7];
+route_percent_1 = 0.80;
+route_percent_2 = 0.60;
+p1122 = [p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+p2233 = [p2(1) + (p3(1) - p2(1))*route_percent_1,p2(2) + (p3(2) - p2(2))*route_percent_1];
+p3344 = [p3(1) + (p4(1) - p3(1))*route_percent_2,p3(2) + (p4(2) - p3(2))*route_percent_2];
+p4455 = [p4(1) + (p5(1) - p4(1))*route_percent_2,p4(2) + (p5(2) - p4(2))*route_percent_2];
+p5566 = [p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+
 yc0xt = cols_height;
 
 %end % end function
