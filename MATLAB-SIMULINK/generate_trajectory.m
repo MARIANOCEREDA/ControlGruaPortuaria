@@ -56,6 +56,8 @@ left_cols=cols_height(1:index_goal);
 % Buscamos los de las columnas de mayor altura , tanto la que se encuentra mas a la izquierda como la que se encuentra mas a la
 % derecha.
 max=0;
+imax_left=0;
+imax_right=0;
 for i=1:index_goal
     if left_cols(i)>=max
         imax_right=i;
