@@ -47,7 +47,7 @@ while(1)
         break;
     end
 end
-%index_goal=1;
+index_goal=9;
 p7=[cols_centers(index_goal),cols_height(index_goal)];
 
 % Generamos un vector que solo contenga las columnas a la izquierda del punto objetivo. Son los unicos puntos que importan.
@@ -186,7 +186,22 @@ switch(to_where)
    
 end % end switch
 
+points = [p1;p2;p3;p4;p5;p6];
+v_points = zeros(7,2);
 %% Plot del perfil de trayectoria obtenido
+
+% reduction_point
+break_point_y = ((VH_MAX/2)^2)/(2*(ddymax));
+break_point_x = ((VT_MAX/2)^2)/(2*(ddxmax));
+
+p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+p3344 = [ p4(1)-break_point_x/2,p4(2)];
+p4455 = [ p5(1) - break_point_x,break_point_x*slope + p5(2)];
+p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+
+yc0xt = cols_height;
+
+
 hold on
 if (plt_traj == "true")
     plot_containers(cols_height,cols_centers);
@@ -198,17 +213,10 @@ if (plt_traj == "true")
     plot(p7(1),p7(2),'bo')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
+    plot(p2233(1),p2233(2),'ko')
+    plot(p3344(1),p3344(2),'bo')
+    plot(p4455(1),p4455(2),'bo')
 end %endif
-
-route_percent_1 = 0.80;
-route_percent_2 = 0.60;
-p1122 = [p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
-p2233 = [p2(1) + (p3(1) - p2(1))*route_percent_1,p2(2) + (p3(2) - p2(2))*route_percent_1];
-p3344 = [p3(1) + (p4(1) - p3(1))*route_percent_2,p3(2) + (p4(2) - p3(2))*route_percent_2];
-p4455 = [p4(1) + (p5(1) - p4(1))*route_percent_2,p4(2) + (p5(2) - p4(2))*route_percent_2];
-p5566 = [p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
-
-yc0xt = cols_height;
 
 %end % end function
 
