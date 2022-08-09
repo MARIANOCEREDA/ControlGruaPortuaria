@@ -39,15 +39,10 @@ slope=atan(VH_MAX/VT_MAX); %pendiente
 % Definimos el punto de inicio (p1) en el muelle con coordenadas x,y
 p0=[-20,0];
 
-% Generamos un numero aleatorio que nos dice a que numero de columna debemos llevar el contenedor. Definimos asi p6.
-while(1)
-    %index_goal=randi([1,N_COLS],1,1);
-    index_goal = 9;
-    if cols_height(index_goal)<C_HEIGHT*MAX_C_OVER_DOCK
-        break;
-    end
-end
-index_goal=9;
+% Indice de columna objetivo
+index_goal=7;
+
+% Coordenada (x,y) de columna objetivo
 p7=[cols_centers(index_goal),cols_height(index_goal)];
 
 % Generamos un vector que solo contenga las columnas a la izquierda del punto objetivo. Son los unicos puntos que importan.
@@ -161,7 +156,12 @@ p6 = [p7(1),(p5(2)-p7(2))/2+p7(2)];
 
 switch(to_where)    
     case 'to_ship' 
-    % En este caso los puntos seran como se calcularon.
+    % Puntos donde comienzan cambios de direccion / velocidad para TO SHIP
+    p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+    p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+    p3344 = [ p4(1)-break_point_x/2,p4(2)];
+    p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
+    p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
     
     case 'to_dock'       
     % En este caso se invierten los puntos, el p1 sera aleatorio y el p6
@@ -183,6 +183,14 @@ switch(to_where)
     p2=p5d;
     p1=p6d;
     p0=p0d;
+    
+    % Puntos donde comienzan cambios de direccion / velocidad para TO DOCK
+    p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+    p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+    p3344 = [ p4(1)-break_point_x/2,p4(2)];
+    p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
+    p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+    
    
 end % end switch
 
@@ -193,16 +201,12 @@ v_points = zeros(7,2);
 % reduction_point
 break_point_y = ((VH_MAX/2)^2)/(2*(ddymax));
 break_point_x = ((VT_MAX/2)^2)/(2*(ddxmax));
-
-p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
-p3344 = [ p4(1)-break_point_x/2,p4(2)];
-p4455 = [ p5(1) - break_point_x,break_point_x*slope + p5(2)];
-p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+route_percent_1 = 0.8;
 
 yc0xt = cols_height;
 
-
 hold on
+grid on
 if (plt_traj == "true")
     plot_containers(cols_height,cols_centers);
     plot(p0(1),p0(2),'ko')
@@ -213,10 +217,21 @@ if (plt_traj == "true")
     plot(p7(1),p7(2),'bo')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
-    plot(p2233(1),p2233(2),'ko')
-    plot(p3344(1),p3344(2),'bo')
-    plot(p4455(1),p4455(2),'bo')
+    plot(p1122(1),p1122(2),'b*')
+    plot(p2233(1),p2233(2),'b*')
+    plot(p3344(1),p3344(2),'b*')
+    plot(p4455(1),p4455(2),'b*')
 end %endif
+
+%% ############################################
+% ########### PLOT SIMULATION GRAPH ###########
+% #############################################
+
+% Plot for index_goal = 9
+plot(xl_dc_goal_9.data, yl_dc_goal_9.data);
+
+% Plot for index_goal = 7
+plot(xl_dc_goal_7.data, yl_dc_goal_7.data);
 
 %end % end function
 

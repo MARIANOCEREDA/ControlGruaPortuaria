@@ -17,7 +17,7 @@ CYCLE_TYPE="single";
 %cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
 %cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
 cols_centers = [5,10,15, 20,25,30,35,40,45];
-cols_height = [34,34,19,19,35,30,30,23,23];
+cols_height = [30,34,19,19,35,30,30,23,23];
 plot_containers(cols_height,cols_centers);
 %% ##########################################
 % ######## Trolley translation ##############
@@ -143,6 +143,7 @@ Ksiah = Meqh*w_posh^3;
 w_mt_i = 1000;
 w_mt_h = 1000;
 %% #########################################
-% ## GENERACION DE PUNTOS DE TRAYECTORIA ###
+% ######## GANANCIAS PD BALANCEO ##########3
 % ##########################################
+[Kp,Kd] = PD_balanceo(mt, 65000, Meqt);
 
