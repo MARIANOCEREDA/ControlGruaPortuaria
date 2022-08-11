@@ -1,9 +1,10 @@
 %function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
 
 weight = 23562;
-to_where = 'to_ship';
+where = 'to_dock';
 cycle_type = 'single';
 plt_traj = "true";
+operation_mode = 'unloading';
 
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
@@ -40,7 +41,7 @@ slope=atan(VH_MAX/VT_MAX); %pendiente
 p0=[-20,0];
 
 % Indice de columna objetivo
-index_goal=7;
+index_goal=4;
 
 % Coordenada (x,y) de columna objetivo
 p7=[cols_centers(index_goal),cols_height(index_goal)];
@@ -154,6 +155,7 @@ end
 p1 = [p0(1),(p2(2)-p0(2))/2];
 p6 = [p7(1),(p5(2)-p7(2))/2+p7(2)];
 
+%{
 switch(to_where)    
     case 'to_ship' 
     % Puntos donde comienzan cambios de direccion / velocidad para TO SHIP
@@ -193,15 +195,87 @@ switch(to_where)
     
    
 end % end switch
+%}
 
-points = [p1;p2;p3;p4;p5;p6];
-v_points = zeros(7,2);
-%% Plot del perfil de trayectoria obtenido
 
-% reduction_point
-break_point_y = ((VH_MAX/2)^2)/(2*(ddymax));
-break_point_x = ((VT_MAX/2)^2)/(2*(ddxmax));
+
+%% Decision de puntos de viraje según estado del barco
+% Puntos de viraje para velocidad media
+
+break_point_y_MAX = ((VH_MAX/2)^2)/(2*(ddymax));
+break_point_x_MAX = ((VT_MAX/2)^2)/(2*(ddxmax));
+
+% Puntos de viraje para velocidad maxima
+break_point_y = ((VH_MAX)^2)/(2*(ddymax));
+break_point_x = ((VT_MAX)^2)/(2*(ddxmax));
+
 route_percent_1 = 0.8;
+
+p00 = p0;
+p11 = p1;
+p22 = p2;
+p33 = p3;
+p44 = p4;
+p55 = p5;
+p66 = p6;
+p77 = p7;
+
+%% Definimos puntos guia cuando falte el 10% para llegar al siguiente punto
+% para que en ese punto comience a bajar la velocidad de a poco
+switch(where)    
+    case "to_ship"
+        switch(operation_mode)
+            case "loading"
+                % Puntos de viraje para velocidad maxima
+                break_point_y = ((VH_MAX/1.6666)^2)/(2*1);
+                break_point_x = ((VT_MAX/1.6666)^2)/(2*1);
+                route_percent_1 = 0.8;
+                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+                p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+                p3344 = [ p3(1) + (p4(1) - p3(1))*route_percent_1,p3(2) + (p4(2) - p3(2))*route_percent_1 ];
+                p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
+                p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+            
+            case "unloading"
+                break_point_y = ((VH_MAX)^2)/(2*1);
+                break_point_x = ((VT_MAX)^2)/(2*1);
+                route_percent_1 = 0.6;
+                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+                p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+                p3344 = [ p3(1) + (p4(1) - p3(1))*route_percent_1,p3(2) + (p4(2) - p3(2))*route_percent_1 ];
+                p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
+                p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
+                
+        end
+       
+            
+      
+    case "to_dock"
+        switch(operation_mode)
+            case "loading"
+                % Puntos de viraje para velocidad maxima
+                break_point_y = ((VH_MAX)^2)/(2*1);
+                break_point_x = ((VT_MAX)^2)/(2*1);
+                route_percent_1 = 0.6;
+                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+                p5566 = [ p6(1) + (p5(1) - p6(1))*route_percent_1,p6(2) + (p5(2) - p6(2))*route_percent_1]; %p65
+                p4455 = [ break_point_y/slope + p4(1),p4(2)-break_point_y ]; %p54
+                p3344 = [ p4(1) + (p3(1) - p4(1))*route_percent_1,p4(2) + (p3(2) - p4(2))*route_percent_1]; %p43
+                p2233 = [ p2(1) + 2*break_point_x,2*break_point_x*slope + p2(2) ]; %p32
+            
+            case "unloading"
+                break_point_y = ((VH_MAX/1.6666)^2)/(2*1);
+                break_point_x = ((VT_MAX/1.6666)^2)/(2*1);
+                route_percent_1 = 0.6;
+                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
+                p5566 = [ p6(1) + (p5(1) - p6(1))*route_percent_1,p6(2) + (p5(2) - p6(2))*route_percent_1]; %p65
+                p4455 = [ break_point_y/slope + p4(1),p4(2)-break_point_y ]; %p54
+                p3344 = [ p4(1) + (p3(1) - p4(1))*route_percent_1,p4(2) + (p3(2) - p4(2))*route_percent_1]; %p43
+                p2233 = [ p2(1) + 3.5*break_point_x,3.5*break_point_x*slope + p2(2) ]; %p32
+                
+        end
+        
+end
 
 yc0xt = cols_height;
 
@@ -218,9 +292,10 @@ if (plt_traj == "true")
     plot([p4(1) p5(1)],[p4(2) p5(2)],'r')
     plot([p4(1) p5(1)],[p4(2) p5(2)],'ko')
     plot(p1122(1),p1122(2),'b*')
-    plot(p2233(1),p2233(2),'b*')
-    plot(p3344(1),p3344(2),'b*')
-    plot(p4455(1),p4455(2),'b*')
+    plot(p2233(1),p2233(2),'bo')
+    plot(p3344(1),p3344(2),'bx')
+    plot(p4455(1),p4455(2),'b.')
+    plot(p5566(1),p5566(2),'bs')
 end %endif
 
 %% ############################################
@@ -228,10 +303,10 @@ end %endif
 % #############################################
 
 % Plot for index_goal = 9
-plot(xl_dc_goal_9.data, yl_dc_goal_9.data);
+plot(xl_to_dock_unloading.data, yl_to_dock_unloading.data);
 
 % Plot for index_goal = 7
-plot(xl_dc_goal_7.data, yl_dc_goal_7.data);
+%plot(xl_dc_goal_7.data, yl_dc_goal_7.data);
 
 %end % end function
 
