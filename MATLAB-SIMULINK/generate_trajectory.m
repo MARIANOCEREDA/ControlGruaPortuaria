@@ -1,10 +1,10 @@
 %function [p0,p1,p2,p3,p4,p5,p6,p7,VH_MAX,VT_MAX] = generate_trajectory(weight,to_where,cycle_type,cols_height,cols_centers)
 
 weight = 23562;
-where = 'to_dock';
+where = 'to_ship';
 cycle_type = 'single';
 plt_traj = "true";
-operation_mode = 'unloading';
+operation_mode = 'loading';
 
 %% Defincion de los parametros iniciales previo a comenzar el trayecto
 
@@ -35,13 +35,12 @@ MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [
     
 
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
-slope=atan(VH_MAX/VT_MAX); %pendiente
-
+slope=atan(VH_MAX/(VT_MAX*0.6)); %pendiente
 % Definimos el punto de inicio (p1) en el muelle con coordenadas x,y
 p0=[-20,0];
 
 % Indice de columna objetivo
-index_goal=4;
+index_goal=9;
 
 % Coordenada (x,y) de columna objetivo
 p7=[cols_centers(index_goal),cols_height(index_goal)];
@@ -227,29 +226,27 @@ switch(where)
         switch(operation_mode)
             case "loading"
                 % Puntos de viraje para velocidad maxima
-                break_point_y = ((VH_MAX/1.6666)^2)/(2*1);
-                break_point_x = ((VT_MAX/1.6666)^2)/(2*1);
-                route_percent_1 = 0.8;
+                break_point_y = ((VH_MAX)^2)/(2*1);
+                break_point_x = ((VT_MAX)^2)/(2*1);
+                route_percent_1 = 0.65;
                 p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
-                p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+                p2233 = [ -break_point_y/slope + p3(1),p3(2) - break_point_y];
                 p3344 = [ p3(1) + (p4(1) - p3(1))*route_percent_1,p3(2) + (p4(2) - p3(2))*route_percent_1 ];
-                p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
+                p4455 = [ p5(1) - 2*break_point_x,2*break_point_x*slope + p5(2)];
                 p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
-            
+                disp("to ship loading");
             case "unloading"
                 break_point_y = ((VH_MAX)^2)/(2*1);
                 break_point_x = ((VT_MAX)^2)/(2*1);
-                route_percent_1 = 0.6;
-                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
-                p2233 = [ -break_point_y/slope + p3(1),p3(2)-break_point_y];
+                route_percent_1 = 0.8;
+                p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1*1.2];
+                p2233 = [ -1.5*break_point_x + p3(1),p3(2)-1.5*break_point_x];
                 p3344 = [ p3(1) + (p4(1) - p3(1))*route_percent_1,p3(2) + (p4(2) - p3(2))*route_percent_1 ];
-                p4455 = [ p5(1) - 3.5*break_point_x,3.5*break_point_x*slope + p5(2)];
-                p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
-                
+                p4455 = [ p5(1) - 2*break_point_x,2*break_point_x*slope + p5(2)];
+                p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1*2,p5(2) + (p6(2) - p5(2))*route_percent_1*2];
+                disp("to ship unloading");
         end
        
-            
-      
     case "to_dock"
         switch(operation_mode)
             case "loading"
@@ -303,10 +300,10 @@ end %endif
 % #############################################
 
 % Plot for index_goal = 9
-plot(xl_to_dock_unloading.data, yl_to_dock_unloading.data);
+% plot(xl_to_dock_unloading.data, yl_to_dock_unloading.data);
 
 % Plot for index_goal = 7
-%plot(xl_dc_goal_7.data, yl_dc_goal_7.data);
+plot(xl_sim.data, yl_sim.data);
 
 %end % end function
 
