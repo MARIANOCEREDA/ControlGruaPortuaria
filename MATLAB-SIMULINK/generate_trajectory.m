@@ -67,7 +67,7 @@ end
 
 % Definimos la altura de seguridad que me definira la coord y de p3.
 % Se considera la altura de 2 contenedores para seguridad
-H_SAFE=max+2*C_HEIGHT;
+H_SAFE=max+4*C_HEIGHT;
 
 % Definimos el x de seguridad, que define la coord. x de p3
 % Se considera el ancho de un contenedor para seguridad
@@ -228,11 +228,11 @@ switch(where)
                 % Puntos de viraje para velocidad maxima
                 break_point_y = ((VH_MAX)^2)/(2*1);
                 break_point_x = ((VT_MAX)^2)/(2*1);
-                route_percent_1 = 0.65;
+                route_percent_1 = 0.65; % 0.9
                 p1122 = [ p1(1) + (p2(1) - p1(1))*route_percent_1,p1(2) + (p2(2) - p1(2))*route_percent_1];
-                p2233 = [ -break_point_y/slope + p3(1),p3(2) - break_point_y];
+                p2233 = [ -2*break_point_y/slope + p3(1),p3(2)-1.5*break_point_y/slope];
                 p3344 = [ p3(1) + (p4(1) - p3(1))*route_percent_1,p3(2) + (p4(2) - p3(2))*route_percent_1 ];
-                p4455 = [ p5(1) - 2*break_point_x,2*break_point_x*slope + p5(2)];
+                p4455 = [ p5(1) - 1.6*break_point_x,1.6*break_point_x*slope + p5(2)];
                 p5566 = [ p5(1) + (p6(1) - p5(1))*route_percent_1,p5(2) + (p6(2) - p5(2))*route_percent_1];
                 disp("to ship loading");
             case "unloading"
