@@ -25,15 +25,6 @@ N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
 MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
 MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
 
-% Generamos de forma aleatoria columnas con diferentes alturas.
-%cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
-
-%Generamos array que contiene los centros de cada columna respecto al
-%muelle (punto 0,0)
-%delta = 0; 
-%cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
-    
-
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
 %% Comienzo de generacion de la trayectoria dependiendo de la situacion
 %slope=atan(VH_MAX_/VT_MAX_); %pendiente
@@ -44,10 +35,10 @@ p0=[-20,0];
 % Generamos un numero aleatorio que nos dice a que numero de columna debemos llevar el contenedor. Definimos asi p6.
 
 % Indice de columna objetivo
-index_goal=6;
+index_goal=4;
 
 % Coordenada (x,y) de columna objetivo
-p7=[cols_centers(index_goal),cols_height(index_goal)];
+p7=[cols_centers(index_goal),cols_height(index_goal)+C_HEIGHT];
 
 % Generamos un vector que solo contenga las columnas a la izquierda del punto objetivo. Son los unicos puntos que importan.
 left_cols=cols_height(1:index_goal);
@@ -73,7 +64,7 @@ end
 % Se considera la altura de 2 contenedores para seguridad
 H_SAFE=max+4*C_HEIGHT;
 p5 = [p7(1),max+2*C_HEIGHT];
-p6 = [p7(1),p7(2)+(p5(2)-p7(2))*0.5];
+p6 = [p7(1),p7(2)+(p5(2)-p7(2))*0.7];
 p4 = [p7(1) - 13,H_SAFE];
 p3 = [-5,H_SAFE];
 p2 = [p0(1),H_SAFE - 12];
@@ -103,6 +94,7 @@ end %endif
 
 % Plot for index_goal = 7
 plot(xl_sim.data, yl_sim.data);
+plot(xl_sim_c_4.data,yl_sim_c_4.data);
 
 %end % end function
 
