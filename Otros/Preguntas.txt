@@ -1,16 +1,1 @@
-Con que otros sensores se cuenta ? Para medir velocidad de los motores, velocidad del izaje y velocidad del carro? 
-Que valores debe tener bt ?
-Bequivalente de motor + rueda.
-Valor que hay que darle a Wn (Definendo unos polos a lazo cerrado 10 veces mas rápidos que los de la planta original, deberian quedar definifod xita y wn).
-Ventajas de PD, PID.
-Se usa Meqt, o mt (control del ángulo de balanceo de carga).
-El controlador de compensacion de ángulo debe operar en PARALELO con el controlador de movimiento del carro? (concurrencia?)
-Puedo medir l (longitud del cable)?
-Puedo medir xl (posicion en x de la carga)?
-Ciclos de operación - ciclo doble, pagina 4 de pdf de consignas.
----------------------------------------------------
-Esta permitido que el operador haga todo manual? O si o si debe cumplirse el ciclo simple o doble?
-El operador configura el ciclo antes de comenzar a levantar?
-La trayectoria se va generando sobre la marcha?
-La velocidad debe ser trapezoidal?
-
+COndicion inicial en y. Cual usar ? C_HEIGHT ?
