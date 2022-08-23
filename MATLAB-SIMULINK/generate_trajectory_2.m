@@ -93,8 +93,8 @@ end %endif
 % plot(xl_to_dock_unloading.data, yl_to_dock_unloading.data);
 
 % Plot for index_goal = 7
-plot(xl_sim.data, yl_sim.data);
-plot(xl_sim_c_4.data,yl_sim_c_4.data);
+% plot(xl_sim.data, yl_sim.data);
+plot(xl_sim_dc.data,yl_sim_dc.data);
 
 %end % end function
 
