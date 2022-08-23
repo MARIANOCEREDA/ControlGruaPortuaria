@@ -67,7 +67,7 @@ p5 = [p7(1),max+2*C_HEIGHT];
 p6 = [p7(1),p7(2)+(p5(2)-p7(2))*0.7];
 p4 = [p7(1) - 13,H_SAFE];
 p3 = [-5,H_SAFE];
-p2 = [p0(1),H_SAFE - 12];
+p2 = [p0(1),H_SAFE - 2*C_HEIGHT];
 p1 = [p0(1),10];
 
 
@@ -94,7 +94,7 @@ end %endif
 
 % Plot for index_goal = 7
 % plot(xl_sim.data, yl_sim.data);
-plot(xl_sim_dc.data,yl_sim_dc.data);
+plot(xl_sim_dc_masa.data,yl_sim_dc_masa.data);
 
 %end % end function
 
