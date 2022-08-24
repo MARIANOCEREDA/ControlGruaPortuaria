@@ -60,8 +60,6 @@ dymax = 1.5;
 % - Aceleration limits[m/s2]
 ddymin = -1;
 ddymax = 1;
-% - Fixed height of trolley and hoisting system [m]
-yt0 = 45.0;
 % - Still beam [m]
 YSB = 15.0;
 % - Wire rope traction stiffness[N/m]
@@ -100,7 +98,13 @@ bcx = 1000.0;
 g = 9.80665;
 % - Spreader mass [kg]
 sp_mass = 15000.0;
-lh0 = yt0 - C_HEIGHT - 5 -(sp_mass * g) / Kw;
+% - Fixed height of trolley and hoisting system [m]
+yt0 = 45.0;
+% yl0 = 0;
+% lh0 = yt0 - (sp_mass * g) / Kw;
+yl0 = C_HEIGHT + 5; %COndicion inicial carga
+l0 = yt0 - yl0;
+lh0 = yt0 - C_HEIGHT - 5 + 2*(sp_mass * g) / Kw; %COndicion inicial cable
 % - Minimum container mass[kg] -> Empty container
 min_m = 2000.0;
 % - Maximum container mass[kg]
