@@ -91,20 +91,13 @@ Meqh = Mh + (Jmh*rth^2 + Jd)/Rd^2;
 % - Vertical stiffnes (rigidez) [kN/m]
 Kcy = 1.3e6; %1.3e8 segun PDF, 1.3e6 segun crodobes
 % - Vertical friction [kN/(m/s)]
-bcy = 500.0; %1000 segund PDF , 500 SEGUN CORDOBES
+bcy = 500; %1000 segund PDF , 500 SEGUN CORDOBES
 % - Horizontal friction [kN/(m/s)]
 bcx = 1000.0;
 % - Gravity
 g = 9.80665;
 % - Spreader mass [kg]
 sp_mass = 15000.0;
-% - Fixed height of trolley and hoisting system [m]
-yt0 = 45.0;
-% yl0 = 0;
-% lh0 = yt0 - (sp_mass * g) / Kw;
-yl0 = C_HEIGHT + 5; %COndicion inicial carga
-l0 = yt0 - yl0;
-lh0 = yt0 - C_HEIGHT - 5 + 2*(sp_mass * g) / Kw; %COndicion inicial cable
 % - Minimum container mass[kg] -> Empty container
 min_m = 2000.0;
 % - Maximum container mass[kg]
@@ -114,6 +107,13 @@ ml_max=max_m+sp_mass;
 % - Random mass
 %cont_mass = random_mass(min_m,max_m);
 cont_mass = max_m;
+% - Fixed height of trolley and hoisting system [m]
+yt0 = 45.0;
+yl0 = 0;
+lh0 = yt0 + (ml_max * g) / Kw;
+%yl0 = C_HEIGHT + 5; %COndicion inicial carga
+l0 = yt0 - yl0;
+%lh0 = yt0 - C_HEIGHT - 5 + 2*(sp_mass * g) / Kw; %COndicion inicial cable
 %% ####################################
 % ######### Trolley PID Gains #########
 % #####################################
