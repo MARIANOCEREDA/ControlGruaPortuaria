@@ -111,7 +111,7 @@ cont_mass = max_m;
 % - Fixed height of trolley and hoisting system [m]
 yt0 = 45.0;
 yl0 = 0;
-lh0 = yt0 - (ml_max * g) / Kw;
+lh0 = yt0 - (sp_mass * g) / Kw;
 %yl0 = C_HEIGHT + 5; %COndicion inicial carga
 l0 = yt0 - yl0;
 %lh0 = yt0 - C_HEIGHT - 5 + 2*(sp_mass * g) / Kw; %COndicion inicial cable
