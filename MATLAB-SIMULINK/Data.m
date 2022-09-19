@@ -18,6 +18,7 @@ delta = 0.0;
 cols_centers = [5,10,15,20,25,30,35,40,45];
 % cols_height = [30,34,19,30,35,30,30,23,23];
 cols_height = [20,26,19,8,26,20,26,23,23];
+hold on
 plot_containers(cols_height,cols_centers);
 %% ##########################################
 % ######## Trolley translation ##############
@@ -111,7 +112,7 @@ cont_mass = max_m;
 % - Fixed height of trolley and hoisting system [m]
 yt0 = 45.0;
 yl0 = 0;
-lh0 = yt0 - (sp_mass * g) / Kw;
+lh0 = yt0 + (sp_mass * g) / Kw;
 %yl0 = C_HEIGHT + 5; %COndicion inicial carga
 l0 = yt0 - yl0;
 %lh0 = yt0 - C_HEIGHT - 5 + 2*(sp_mass * g) / Kw; %COndicion inicial cable
@@ -150,6 +151,6 @@ w_mt_h = 1000;
 % ######## GANANCIAS PD BALANCEO ##########3
 % ##########################################
 [Kp,Kd] = PD_balanceo(mt, 65000, Meqt);
-
+plot(xl_export.data, yl_export.data);
 
 
