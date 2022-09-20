@@ -151,6 +151,7 @@ w_mt_h = 1000;
 % ######## GANANCIAS PD BALANCEO ##########3
 % ##########################################
 [Kp,Kd] = PD_balanceo(mt, 65000, Meqt);
+
 plot(xl_export.data, yl_export.data);
 
 
