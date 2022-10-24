@@ -8,11 +8,11 @@ dt=1/50;
 C_HEIGHT = 2.89;
 C_WIDTH = 2.5; 
 S_WIDTH = 45.0;
-%N_COLS = round(S_WIDTH/C_WIDTH); % Cantidad de columnas del barco
+%N_COLS = round(S_WID
 N_COLS = 9;
-MAX_C_OVER_DOCK= 9; % Cantidad maxima de containers sobre nivel del muelle
-MAX_C_UNDER_DOCK = 4; % cantidad de containers por debajo del nivel del muelle [metros]
-delta = 0.0; 
+MAX_C_OVER_DOCK= 9;
+MAX_C_UNDER_DOCK = 4;
+ 
 %cols_height = generate_cols_height(MAX_C_OVER_DOCK,N_COLS,C_HEIGHT,MAX_C_UNDER_DOCK);
 % cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
 cols_centers = [5,10,15,20,25,30,35,40,45];
