@@ -1,10 +1,10 @@
 % function [p00,p11,p22,p33,p44,p55,p66,p77] = generate_trajectory_2 (ml_,VH_MAX_,VT_MAX_,to_where_,loading_,cols_height_,cols_centers_,mode,index_)
 
-where = "to_dock";
+where = "to_ship";
 plt_traj = "true";
 cycle_type = "single";
 operation_mode = "loading";
-index_ = 9;
+index_ = 5;
 cols_centers_ = [5,10,15,20,25,30,35,40,45];
 cols_height_ = [20,26,19,8,26,20,26,23,23];
 
@@ -53,7 +53,7 @@ end
 %% Calculo de p3 y p2
 
 % Definimos la altura de seguridad que me definira la coord y de p3.
-H_SAFE=max+C_HEIGHT;
+H_SAFE=max+2*C_HEIGHT;
 H_AUTO = 5;
 % Se considera la altura de 2 contenedores para seguridad
 %H_SAFE=max+4*C_HEIGHT;
@@ -71,8 +71,10 @@ switch(where)
         switch(operation_mode)
             case "loading"
                 % Puntos de viraje para velocidad maxima               
-                 p55 = [p77(1),H_SAFE];
-                 p66 = [p77(1),p77(2)+(p55(2)-p77(2))*0.7];
+                 % Puntos de viraje para velocidad maxima               
+                 p55 = [p77(1),max+2*C_HEIGHT];
+                 %p66 = [p77(1),p77(2)+(p55(2)-p77(2))*0.7];
+                 p66 = [p77(1),p77(2)+1];
                  p44 = [p77(1) - 13.2,H_SAFE];
                  p33 = [-5,H_SAFE];
                  
@@ -87,7 +89,8 @@ switch(where)
                  end
                  
                  p22 = [p00(1),H_SAFE-2*C_HEIGHT];
-                 p11 = [p00(1),10];
+                 p11 = [p00(1),H_AUTO];
+                 
                  
             case "unloading"
                 p55 = [p77(1),max+2*C_HEIGHT];
@@ -108,19 +111,20 @@ switch(where)
     case "to_dock"
         switch(operation_mode)
             case "loading"
-                p55 = [p77(1),max+C_HEIGHT];
-                p66 = [p77(1),p77(2)+(p55(2)-p77(2))*0.7];
-                p44 = [p77(1) - 13.2,H_SAFE];
+                p55 = [p77(1),max];
+                p66 = [p77(1),p77(2)+(p55(2)-p77(2))*0.7]; %p7(2)+(p5(2)-p77(2))*0.7
+                p44 = [p77(1)-2,H_SAFE];
                 p33 = [-5,H_SAFE];
                 
-                 if index_goal == 1
-                     p44 = [-8,H_SAFE];
-                     p33 = [-15,H_SAFE];
-                 end
+                if index_goal == 1  || index_goal == 2
+                    p55 = [p77(1),H_SAFE];
+                    p44 = [p77(1),H_SAFE];
+                    p33 = [-4,H_SAFE];
+                end
                 
-                p22 = [p00(1),H_SAFE-2*C_HEIGHT];
+                
+                p22 = [p00(1),H_SAFE];
                 p11 = [p00(1),H_AUTO];
-                disp("to dock loading");
 
             case "unloading"
                 p55 = [p77(1),max];

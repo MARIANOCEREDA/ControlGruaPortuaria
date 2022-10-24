@@ -17,7 +17,7 @@ MAX_C_UNDER_DOCK = 4;
 % cols_centers = find_cols_centers(C_WIDTH/2,delta,N_COLS);
 cols_centers = [5,10,15,20,25,30,35,40,45];
 % cols_height = [30,34,19,30,35,30,30,23,23];
-cols_height = [20,26,19,8,26,20,26,23,23];
+cols_height = [20,23,17,8,25,20,25,20,20];
 hold on
 plot_containers(cols_height,cols_centers);
 %% ##########################################
