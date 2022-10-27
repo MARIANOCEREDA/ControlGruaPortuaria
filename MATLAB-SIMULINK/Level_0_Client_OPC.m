@@ -67,6 +67,6 @@ if uaClient.isConnected == 1 && init_nodes1 == 1
     writeValue(ml,input(12));
 end
 
-output_data = double([dxt,dlh,balance]);
+output_data = double([alert_t,alert_h,alert,alert_wd]);
 
 end
