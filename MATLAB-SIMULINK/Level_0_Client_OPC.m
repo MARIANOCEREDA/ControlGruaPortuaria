@@ -22,11 +22,9 @@ end
 if uaClient.isConnected == 1 && init_nodes1 == 0
     init_nodes1 = 1;
     % OPC nodes
-    var_node_in = findNodeByName(uaClient.Namespace,'input','-once');
-    var_node_out = findNodeByName(uaClient.Namespace,'output','-once');
+    var_node_in = findNodeByName(uaClient.Namespace,'INPUT','-once');
+    var_node_out = findNodeByName(uaClient.Namespace,'OUTPUT','-once');
     % Inputs
-    x = findNodeByName(var_node_in,'x','-once');
-    y = findNodeByName(var_node_in,'y','-once');
     dxt_in = findNodeByName(var_node_in,'dxt_in','-once');
     dlh_in = findNodeByName(var_node_in,'dlh_in','-once');
     fdct_r = findNodeByName(var_node_in,'fdct_r','-once');
@@ -67,6 +65,6 @@ if uaClient.isConnected == 1 && init_nodes1 == 1
     writeValue(ml,input(12));
 end
 
-output_data = double([alert_t,alert_h,alert,alert_wd]);
+output_data = [alert_t,alert_h,alert,alert_wd];
 
 end

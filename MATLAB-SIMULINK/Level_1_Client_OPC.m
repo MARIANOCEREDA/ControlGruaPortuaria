@@ -5,7 +5,7 @@ persistent uaClient;
 persistent var_node_in;
 persistent var_node_out;
 persistent dxt dlh balance;
-persistent y x dlh_in dxt_in joy_x joy_t cycle twt auto_mode loading where_ mass_flag ml;
+persistent y x dlh_in dxt_in joy_x joy_t cycle twt auto_mode loading where mass_flag ml;
 
 
 if (isempty(init_server))
@@ -34,7 +34,7 @@ if uaClient.isConnected == 1 && init_nodes1 == 0
     twt = findNodeByName(var_node_in,'twt','-once');
     auto_mode = findNodeByName(var_node_in,'auto_mode','-once');
     loading = findNodeByName(var_node_in,'loading','-once');
-    where_ = findNodeByName(var_node_in,'where_','-once');
+    where = findNodeByName(var_node_in,'where','-once');
     mass_flag = findNodeByName(var_node_in,'mass_flag','-once');
     ml = findNodeByName(var_node_in,'ml','-once');
     % Outputs
@@ -45,9 +45,9 @@ end
 
 if uaClient.isConnected == 1 && init_nodes1 == 1
     % Read values from OPC server (CODESYS)
-    [dxt,~,~] = readValue(uaClient,dxt);
-    [dlh,~,~]=readValue(uaClient,dlh);
-    [balance,~,~]=readValue(uaClient,balance);
+    [dxt,ts1,qual1] = readValue(uaClient,dxt);
+    [dlh,ts2,qual2]=readValue(uaClient,dlh);
+    [balance,ts3,qual3]=readValue(uaClient,balance);
     % Write values to OPC server (CODESYS)
     writeValue(y,input(1));
     writeValue(x,input(2));
@@ -59,11 +59,11 @@ if uaClient.isConnected == 1 && init_nodes1 == 1
     writeValue(twt,input(8));
     writeValue(auto_mode,input(9));
     writeValue(loading,input(10));
-    writeValue(where_,input(11));
+    writeValue(where,input(11));
     writeValue(mass_flag,input(12));
     writeValue(ml,input(13));
 end
 
-output_data = double([dxt,dlh,balance]);
+output_data = [dxt,dlh,balance];
 
 end
