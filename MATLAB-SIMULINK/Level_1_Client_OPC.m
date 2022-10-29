@@ -1,35 +1,38 @@
 function output_data = Level_1_Client_OPC(input)
 persistent init_server;
-persistent init_nodes1;
+persistent init_nodes;
 persistent uaClient;
 persistent var_node_in;
-persistent var_node_out;
 persistent dxt dlh balance;
-persistent y x dlh_in dxt_in joy_x joy_t cycle twt auto_mode loading where mass_flag ml;
+persistent turn_on_system;
+persistent y x dlh_in dxt_in joy_h joy_t cycle twt auto_mode loading where mass_flag ml;
 
-
+disp(init_nodes)
 if (isempty(init_server))
     init_server = 0;
-    init_nodes1 = 0; 
+    init_nodes = 0;
 end
+
 if init_server == 0
     init_server = 1;
+    init_nodes = 0;
     uaClient = opcua('localhost',4840);
     connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
 end
 
-if uaClient.isConnected == 1 && init_nodes1 == 0
-    init_nodes1 = 1;
+if uaClient.isConnected == 1 && init_nodes == 0
+    init_nodes = 1;
     % OPC nodes
-    var_node_in = findNodeByName(uaClient.Namespace,'input','-once');
-    var_node_out = findNodeByName(uaClient.Namespace,'output','-once');
+    var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
+    % var_node_out = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
     % Inputs
+    turn_on_system = findNodeByName(var_node_in,'turn_on_system','-once');
     x = findNodeByName(var_node_in,'x','-once');
     y = findNodeByName(var_node_in,'y','-once');
     dxt_in = findNodeByName(var_node_in,'dxt_in','-once');
     dlh_in = findNodeByName(var_node_in,'dlh_in','-once');
-    joy_x = findNodeByName(var_node_in,'joy_x','-once');
-    joy_t = findNodeByName(var_node_in,'joy_y','-once');
+    joy_h = findNodeByName(var_node_in,'joy_h','-once');
+    joy_t = findNodeByName(var_node_in,'joy_t','-once');
     cycle = findNodeByName(var_node_in,'cycle','-once');
     twt = findNodeByName(var_node_in,'twt','-once');
     auto_mode = findNodeByName(var_node_in,'auto_mode','-once');
@@ -38,32 +41,33 @@ if uaClient.isConnected == 1 && init_nodes1 == 0
     mass_flag = findNodeByName(var_node_in,'mass_flag','-once');
     ml = findNodeByName(var_node_in,'ml','-once');
     % Outputs
-    dxt = findNodeByName(var_node_out,'dxt','-once');
-    dlh = findNodeByName(var_node_out,'dlh','-once');
-    balance = findNodeByName(var_node_out,'balance','-once');
+    dxt = findNodeByName(var_node_in,'dxt','-once');
+    dlh = findNodeByName(var_node_in,'dlh','-once');
+    balance = findNodeByName(var_node_in,'balance','-once');
 end
 
-if uaClient.isConnected == 1 && init_nodes1 == 1
+if uaClient.isConnected == 1 && init_nodes == 1
     % Read values from OPC server (CODESYS)
-    [dxt,ts1,qual1] = readValue(uaClient,dxt);
-    [dlh,ts2,qual2]=readValue(uaClient,dlh);
-    [balance,ts3,qual3]=readValue(uaClient,balance);
+    [dxt,~,~] = readValue(uaClient,dxt);
+    [dlh,~,~]=readValue(uaClient,dlh);
+    [balance,~,~]=readValue(uaClient,balance);
     % Write values to OPC server (CODESYS)
-    writeValue(y,input(1));
-    writeValue(x,input(2));
-    writeValue(dlh_in,input(3));
-    writeValue(dxt_in,input(4));
-    writeValue(joy_x,input(5));
-    writeValue(joy_t,input(6));
-    writeValue(cycle,input(7));
-    writeValue(twt,input(8));
-    writeValue(auto_mode,input(9));
-    writeValue(loading,input(10));
-    writeValue(where,input(11));
-    writeValue(mass_flag,input(12));
-    writeValue(ml,input(13));
+    writeValue(uaClient,y,input(1));
+    writeValue(uaClient,x,input(2));
+    writeValue(uaClient,dlh_in,input(3));
+    writeValue(uaClient,dxt_in,input(4));
+    writeValue(uaClient,joy_t,input(5));
+    writeValue(uaClient,joy_h,input(6));
+    writeValue(uaClient,cycle,input(7));
+    writeValue(uaClient,twt,input(8));
+    writeValue(uaClient,auto_mode,input(9));
+    writeValue(uaClient,loading,input(10));
+    writeValue(uaClient,where,input(11));
+    writeValue(uaClient,mass_flag,input(12));
+    writeValue(uaClient,ml,input(13));
+    writeValue(uaClient,turn_on_system,input(14));
 end
 
-output_data = [dxt,dlh,balance];
+output_data = double([dxt,dlh,balance]);
 
 end
