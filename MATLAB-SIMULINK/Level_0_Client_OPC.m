@@ -41,10 +41,10 @@ end
 
 if uaClient.isConnected == 1 && init_nodes == 1
     % Read values from OPC server (CODESYS)
-    [alert_t,~,~] = readValue(uaClient,alert_t);
+    [alert_t,~,~]= readValue(uaClient,alert_t);
     [alert_h,~,~]= readValue(uaClient,alert_h);
     [alert_wd,~,~]= readValue(uaClient,alert_wd);
-    [alert,~,~] = readValue(uaClient,alert);
+    [alert,~,~]= readValue(uaClient,alert);
     % Write values to OPC server (CODESYS)
     writeValue(uaClient,fdct_r,input(1));
     writeValue(uaClient,fdct_l,input(2));

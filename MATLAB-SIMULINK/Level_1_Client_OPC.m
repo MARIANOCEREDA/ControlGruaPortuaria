@@ -15,7 +15,6 @@ end
 
 if init_server == 0
     init_server = 1;
-    init_nodes = 0;
     uaClient = opcua('localhost',4840);
     connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
 end
@@ -23,7 +22,7 @@ end
 if uaClient.isConnected == 1 && init_nodes == 0
     init_nodes = 1;
     % OPC nodes
-    var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
+    var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS');
     % var_node_out = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
     % Inputs
     turn_on_system = findNodeByName(var_node_in,'turn_on_system','-once');
