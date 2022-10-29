@@ -7,11 +7,16 @@
   </Header>
   <TypeList>
     <TypeSimple name="T_BOOL" size="1" swapsize="0" typeclass="Bool" iecname="BOOL" />
+    <TypeSimple name="T_INT" size="2" swapsize="2" typeclass="Int" iecname="INT" />
     <TypeSimple name="T_REAL" size="4" swapsize="4" typeclass="Real" iecname="REAL" />
   </TypeList>
   <NodeList>
     <Node name="Application">
       <Node name="GLOBALS">
+        <Node name="alert" type="T_BOOL" access="ReadWrite" />
+        <Node name="alert_h" type="T_BOOL" access="ReadWrite" />
+        <Node name="alert_t" type="T_BOOL" access="ReadWrite" />
+        <Node name="alert_wd" type="T_BOOL" access="ReadWrite" />
         <Node name="auto_mode" type="T_BOOL" access="ReadWrite" />
         <Node name="balance" type="T_BOOL" access="ReadWrite" />
         <Node name="cycle" type="T_BOOL" access="ReadWrite" />
@@ -19,6 +24,10 @@
         <Node name="dlh_in" type="T_REAL" access="ReadWrite" />
         <Node name="dxt" type="T_REAL" access="ReadWrite" />
         <Node name="dxt_in" type="T_REAL" access="ReadWrite" />
+        <Node name="fdch_down" type="T_BOOL" access="ReadWrite" />
+        <Node name="fdch_up" type="T_BOOL" access="ReadWrite" />
+        <Node name="fdct_l" type="T_BOOL" access="ReadWrite" />
+        <Node name="fdct_r" type="T_BOOL" access="ReadWrite" />
         <Node name="joy_h" type="T_REAL" access="ReadWrite" />
         <Node name="joy_t" type="T_REAL" access="ReadWrite" />
         <Node name="loading" type="T_BOOL" access="ReadWrite" />
@@ -26,22 +35,11 @@
         <Node name="ml" type="T_REAL" access="ReadWrite" />
         <Node name="turn_on_system" type="T_BOOL" access="ReadWrite" />
         <Node name="twt" type="T_BOOL" access="ReadWrite" />
+        <Node name="wd_in" type="T_INT" access="ReadWrite" />
+        <Node name="wd_reset" type="T_BOOL" access="ReadWrite" />
         <Node name="where" type="T_BOOL" access="ReadWrite" />
         <Node name="x" type="T_REAL" access="ReadWrite" />
         <Node name="y" type="T_REAL" access="ReadWrite" />
-      </Node>
-      <Node name="LEVEL_0">
-        <Node name="alert" type="T_BOOL" access="ReadWrite" />
-        <Node name="alert_h" type="T_BOOL" access="ReadWrite" />
-        <Node name="alert_t" type="T_BOOL" access="ReadWrite" />
-        <Node name="alert_wd" type="T_BOOL" access="ReadWrite" />
-        <Node name="emergency_button" type="T_BOOL" access="ReadWrite" />
-        <Node name="fdch_down" type="T_BOOL" access="ReadWrite" />
-        <Node name="fdch_up" type="T_BOOL" access="ReadWrite" />
-        <Node name="fdct_l" type="T_BOOL" access="ReadWrite" />
-        <Node name="fdct_r" type="T_BOOL" access="ReadWrite" />
-        <Node name="manual_reset" type="T_BOOL" access="ReadWrite" />
-        <Node name="wd_reset" type="T_BOOL" access="ReadWrite" />
       </Node>
     </Node>
   </NodeList>
