@@ -1,4 +1,4 @@
-function output_data = Level_0_Client_OPC(input)
+function [output_data] = Level_0_Client_OPC(input)
 persistent init_server;
 persistent init_nodes;
 persistent uaClient;
@@ -22,7 +22,6 @@ if uaClient.isConnected == 1 && init_nodes == 0
     init_nodes = 1;
     % OPC nodes
     var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
-    % var_node_out = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
     % Inputs
     fdct_r = findNodeByName(var_node_in,'fdct_r','-once');
     fdct_l = findNodeByName(var_node_in,'fdct_l','-once');
@@ -46,6 +45,7 @@ if uaClient.isConnected == 1 && init_nodes == 1
     [alert_wd,~,~]= readValue(uaClient,alert_wd);
     [alert,~,~]= readValue(uaClient,alert);
     % Write values to OPC server (CODESYS)
+    %{
     writeValue(uaClient,fdct_r,input(1));
     writeValue(uaClient,fdct_l,input(2));
     writeValue(uaClient,fdch_up,input(3));
@@ -54,6 +54,7 @@ if uaClient.isConnected == 1 && init_nodes == 1
     writeValue(uaClient,wd_in,input(6));
     writeValue(uaClient,wd_reset,input(7));
     writeValue(uaClient,manual_reset,input(8));
+    %}
 end
 
 output_data = double([alert_t,alert_h,alert,alert_wd]);

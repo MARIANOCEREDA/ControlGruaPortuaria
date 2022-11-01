@@ -1,4 +1,4 @@
-function output_data = Level_1_Client_OPC(input)
+function [output_data] = Level_1_Client_OPC(input)
 persistent init_server;
 persistent init_nodes;
 persistent uaClient;
@@ -50,6 +50,7 @@ if uaClient.isConnected == 1 && init_nodes == 1
     [dxt,~,~] = readValue(uaClient,dxt);
     [dlh,~,~]=readValue(uaClient,dlh);
     [balance,~,~]=readValue(uaClient,balance);
+    disp("iniini");
     % Write values to OPC server (CODESYS)
     writeValue(uaClient,y,input(1));
     writeValue(uaClient,x,input(2));
