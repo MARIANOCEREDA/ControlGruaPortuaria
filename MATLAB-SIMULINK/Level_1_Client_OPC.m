@@ -16,7 +16,8 @@ end
 if init_server == 0
     init_server = 1;
     uaClient = opcua('localhost',4840);
-    connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    connect(uaClient,'facundo', 'facundo');
 end
 
 if uaClient.isConnected == 1 && init_nodes == 0
@@ -37,8 +38,8 @@ if uaClient.isConnected == 1 && init_nodes == 0
     auto_mode = findNodeByName(var_node_in,'auto_mode','-once');
     loading = findNodeByName(var_node_in,'loading','-once');
     where = findNodeByName(var_node_in,'where','-once');
-    mass_flag = findNodeByName(var_node_in,'mass_flag','-once');
     ml = findNodeByName(var_node_in,'ml','-once');
+    mass_flag = findNodeByName(var_node_in,'mass_flag','-once');
     % Outputs
     dxt = findNodeByName(var_node_in,'dxt','-once');
     dlh = findNodeByName(var_node_in,'dlh','-once');
@@ -47,9 +48,9 @@ end
 
 if uaClient.isConnected == 1 && init_nodes == 1
     % Read values from OPC server (CODESYS)
-    [dxt,~,~] = readValue(uaClient,dxt);
-    [dlh,~,~]=readValue(uaClient,dlh);
-    [balance,~,~]=readValue(uaClient,balance);
+    [Dxt,~,~] = readValue(uaClient,dxt);
+    [Dlh,~,~]=readValue(uaClient,dlh);
+    [Balance,~,~]=readValue(uaClient,balance);
     disp("iniini");
     % Write values to OPC server (CODESYS)
     writeValue(uaClient,y,input(1));
@@ -63,11 +64,11 @@ if uaClient.isConnected == 1 && init_nodes == 1
     writeValue(uaClient,auto_mode,input(9));
     writeValue(uaClient,loading,input(10));
     writeValue(uaClient,where,input(11));
-    writeValue(uaClient,mass_flag,input(12));
     writeValue(uaClient,ml,input(13));
+    writeValue(uaClient,mass_flag,input(12));
     writeValue(uaClient,turn_on_system,input(14));
 end
 
-output_data = double([dxt,dlh,balance]);
+output_data = double([Dxt,Dlh,Balance]);
 
 end
