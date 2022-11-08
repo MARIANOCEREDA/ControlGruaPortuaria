@@ -7,6 +7,10 @@ persistent alert alert_t alert_h alert_wd;
 persistent fdct_r fdct_l fdch_up fdch_down emergency_button;
 persistent wd_in wd_reset manual_reset;
 
+Alert_t = 0;
+Alert_wd = 0;
+Alert_h = 0;
+Alert = 0;
 
 if (isempty(init_server))
     init_server = 0;
@@ -15,8 +19,8 @@ end
 if init_server == 0
     init_server = 1;
     uaClient = opcua('localhost',4840);
-    %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
-    connect(uaClient,'facundo', 'facundo');
+    connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    %connect(uaClient,'facundo', 'facundo');
 end
 
 if uaClient.isConnected == 1 && init_nodes == 0

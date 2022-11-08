@@ -7,6 +7,10 @@ persistent dxt dlh balance;
 persistent turn_on_system;
 persistent y x dlh_in dxt_in joy_h joy_t cycle twt auto_mode loading where mass_flag ml;
 
+Dxt = 0;
+Dlh = 0;
+Balance =0;
+
 disp(init_nodes)
 if (isempty(init_server))
     init_server = 0;
@@ -16,8 +20,8 @@ end
 if init_server == 0
     init_server = 1;
     uaClient = opcua('localhost',4840);
-    %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
-    connect(uaClient,'facundo', 'facundo');
+    connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    %connect(uaClient,'facundo', 'facundo');
 end
 
 if uaClient.isConnected == 1 && init_nodes == 0
