@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbolconfiguration xmlns="http://www.3s-software.com/schemas/Symbolconfiguration.xsd">
+  <Header>
+    <Version>3.5.14.0</Version>
+    <SymbolConfigObject version="4.0.0.0" runtimeid="3.5.17.10" libversion="3.5.17.0" compiler="3.5.17.10" lmm="3.5.17.0" profile="CODESYS V3.5 SP17 Patch 1+" settings="SupportOPCUA, LayoutCalculator=OptimizedClientSideLayoutCalculator" />
+    <ProjectInfo name="Sintitulo1" devicename="Device" appname="Application" />
+  </Header>
+  <TypeList>
+    <TypeSimple name="T_BOOL" size="1" swapsize="0" typeclass="Bool" iecname="BOOL" />
+    <TypeSimple name="T_REAL" size="4" swapsize="4" typeclass="Real" iecname="REAL" />
+    <TypeSimple name="T_TIME" size="4" swapsize="4" typeclass="Time" iecname="TIME" />
+    <TypeUserDef name="T_SFCStepType" size="16" nativesize="16" typeclass="Userdef" pouclass="STRUCTURE" iecname="SFCStepType">
+      <UserDefElement iecname="x" type="T_BOOL" byteoffset="0" vartype="VAR" access="ReadWrite" />
+      <UserDefElement iecname="t" type="T_TIME" byteoffset="4" vartype="VAR" access="ReadWrite" />
+      <UserDefElement iecname="_x" type="T_BOOL" byteoffset="8" vartype="VAR" access="ReadWrite" />
+      <UserDefElement iecname="_t" type="T_TIME" byteoffset="12" vartype="VAR" access="ReadWrite" />
+    </TypeUserDef>
+  </TypeList>
+  <NodeList>
+    <Node name="Application">
+      <Node name="GVL">
+        <Node name="dxt" type="T_REAL" access="ReadWrite" />
+        <Node name="flag" type="T_BOOL" access="ReadWrite" />
+      </Node>
+      <Node name="level_1">
+        <Node name="in" type="T_SFCStepType" access="ReadWrite" />
+        <Node name="in__to__Init" type="T_BOOL" access="ReadWrite" />
+        <Node name="Init" type="T_SFCStepType" access="ReadWrite" />
+        <Node name="Init__to__in" type="T_BOOL" access="ReadWrite" />
+      </Node>
+    </Node>
+  </NodeList>
+</Symbolconfiguration>
