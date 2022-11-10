@@ -24,6 +24,7 @@
         <Node name="dlh_in" type="T_REAL" access="ReadWrite" />
         <Node name="dxt" type="T_REAL" access="ReadWrite" />
         <Node name="dxt_in" type="T_REAL" access="ReadWrite" />
+        <Node name="emergency_button" type="T_BOOL" access="ReadWrite" />
         <Node name="fdch_down" type="T_BOOL" access="ReadWrite" />
         <Node name="fdch_up" type="T_BOOL" access="ReadWrite" />
         <Node name="fdct_l" type="T_BOOL" access="ReadWrite" />
@@ -31,6 +32,7 @@
         <Node name="joy_h" type="T_REAL" access="ReadWrite" />
         <Node name="joy_t" type="T_REAL" access="ReadWrite" />
         <Node name="loading" type="T_BOOL" access="ReadWrite" />
+        <Node name="manual_reset" type="T_BOOL" access="ReadWrite" />
         <Node name="mass_flag" type="T_BOOL" access="ReadWrite" />
         <Node name="ml" type="T_REAL" access="ReadWrite" />
         <Node name="turn_on_system" type="T_BOOL" access="ReadWrite" />

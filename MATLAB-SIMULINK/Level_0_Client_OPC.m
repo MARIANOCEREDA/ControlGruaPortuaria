@@ -19,8 +19,8 @@ end
 if init_server == 0
     init_server = 1;
     uaClient = opcua('localhost',4840);
-    connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
-    %connect(uaClient,'facundo', 'facundo');
+    %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    connect(uaClient,'facundo', 'facundo');
 end
 
 if uaClient.isConnected == 1 && init_nodes == 0
@@ -50,7 +50,6 @@ if uaClient.isConnected == 1 && init_nodes == 1
     [Alert_wd,~,~]= readValue(uaClient,alert_wd);
     [Alert,~,~]= readValue(uaClient,alert);
     % Write values to OPC server (CODESYS)
-    %{
     writeValue(uaClient,fdct_r,input(1));
     writeValue(uaClient,fdct_l,input(2));
     writeValue(uaClient,fdch_up,input(3));
@@ -59,7 +58,6 @@ if uaClient.isConnected == 1 && init_nodes == 1
     writeValue(uaClient,wd_in,input(6));
     writeValue(uaClient,wd_reset,input(7));
     writeValue(uaClient,manual_reset,input(8));
-    %}
 end
 
 output_data = double([Alert_t,Alert_h,Alert,Alert_wd]);
