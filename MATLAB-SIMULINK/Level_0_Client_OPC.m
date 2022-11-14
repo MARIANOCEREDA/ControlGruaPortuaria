@@ -19,8 +19,8 @@ end
 if init_server == 0
     init_server = 1;
     uaClient = opcua('localhost',4840);
-    connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
-    %connect(uaClient,'facundo', 'facundo');
+    %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
+    connect(uaClient,'facundo', 'facundo');
 end
 
 if uaClient.isConnected == 1 && init_nodes == 0
