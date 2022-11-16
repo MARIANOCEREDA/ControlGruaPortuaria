@@ -3,8 +3,8 @@ persistent init_server;
 persistent init_nodes;
 persistent uaClient;
 persistent var_node_in;
-persistent dlh_ref dlh_in tmh
-
+persistent dlh_ref dlh_in tmh;
+Tmh=0;
 
 if (isempty(init_server))
     init_server = 0;
@@ -16,8 +16,8 @@ if init_server == 0
     %connect(uaClient,'AUTOMATAS_PLC', 'mariano99');
     connect(uaClient,'facundo', 'facundo');
 end
-
 if uaClient.isConnected == 1 && init_nodes == 0
+    disp("1")
     init_nodes = 1;
     % OPC nodes
     var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
@@ -26,6 +26,7 @@ if uaClient.isConnected == 1 && init_nodes == 0
     dlh_in = findNodeByName(var_node_in,'dlh_in_pid','-once');
     % Outputs
     tmh = findNodeByName(var_node_in,'tmh','-once');
+    disp(tmh);
 end
 
 if uaClient.isConnected == 1 && init_nodes == 1
@@ -34,8 +35,9 @@ if uaClient.isConnected == 1 && init_nodes == 1
     % Write values to OPC server (CODESYS)
     writeValue(uaClient,dlh_in,input(1));
     writeValue(uaClient,dlh_ref,input(2));
+    disp(input(1));
 end
 
-output_data = double(Tmh);
+output_data = double([Tmh,0]);
 
 end

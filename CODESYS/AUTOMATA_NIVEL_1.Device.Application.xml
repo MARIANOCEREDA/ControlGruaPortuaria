@@ -22,8 +22,14 @@
         <Node name="cycle" type="T_BOOL" access="ReadWrite" />
         <Node name="dlh" type="T_REAL" access="ReadWrite" />
         <Node name="dlh_in" type="T_REAL" access="ReadWrite" />
+        <Node name="dlh_in_pid" type="T_REAL" access="ReadWrite" />
+        <Node name="dlh_ref" type="T_REAL" access="ReadWrite" />
+        <Node name="dlh_rl" type="T_REAL" access="ReadWrite" />
         <Node name="dxt" type="T_REAL" access="ReadWrite" />
         <Node name="dxt_in" type="T_REAL" access="ReadWrite" />
+        <Node name="dxt_in_pid" type="T_REAL" access="ReadWrite" />
+        <Node name="dxt_ref" type="T_REAL" access="ReadWrite" />
+        <Node name="dxt_rl" type="T_REAL" access="ReadWrite" />
         <Node name="emergency_button" type="T_BOOL" access="ReadWrite" />
         <Node name="fdch_down" type="T_BOOL" access="ReadWrite" />
         <Node name="fdch_up" type="T_BOOL" access="ReadWrite" />
@@ -35,6 +41,10 @@
         <Node name="manual_reset" type="T_BOOL" access="ReadWrite" />
         <Node name="mass_flag" type="T_BOOL" access="ReadWrite" />
         <Node name="ml" type="T_REAL" access="ReadWrite" />
+        <Node name="tmh" type="T_REAL" access="ReadWrite" />
+        <Node name="tmh_ant" type="T_REAL" access="ReadWrite" />
+        <Node name="tmt" type="T_REAL" access="ReadWrite" />
+        <Node name="tmt_ant" type="T_REAL" access="ReadWrite" />
         <Node name="turn_on_system" type="T_BOOL" access="ReadWrite" />
         <Node name="twt" type="T_BOOL" access="ReadWrite" />
         <Node name="wd_in" type="T_INT" access="ReadWrite" />
