@@ -12,7 +12,7 @@ Dlh = 0;
 Balance =0;
 
 disp(init_nodes)
-if (isempty(init_server))
+if (isempty(init_server)  || input(15)==0)
     init_server = 0;
     init_nodes = 0;
 end

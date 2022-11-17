@@ -6,7 +6,7 @@ persistent var_node_in;
 persistent dxt_ref dxt_in tmt;
 Tmt=0;
 
-if (isempty(init_server))
+if (isempty(init_server) || input(3)==0)
     init_server = 0;
     init_nodes = 0;
 end
@@ -36,6 +36,6 @@ if uaClient.isConnected == 1 && init_nodes == 1
     writeValue(uaClient,dxt_ref,input(2));
 end
 
-output_data = double([Tmt,0]);
+output_data = double(Tmt);
 
 end

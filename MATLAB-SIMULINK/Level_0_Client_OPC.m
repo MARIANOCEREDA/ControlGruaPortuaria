@@ -12,7 +12,7 @@ Alert_wd = 0;
 Alert_h = 0;
 Alert = 0;
 
-if (isempty(init_server))
+if (isempty(init_server) || input(9)==0)
     init_server = 0;
     init_nodes = 0;
 end

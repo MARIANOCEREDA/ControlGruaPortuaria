@@ -3,10 +3,10 @@ persistent init_server;
 persistent init_nodes;
 persistent uaClient;
 persistent var_node_in;
-persistent dlh_ref dlh_in tmh;
+persistent dlh_ref dlh_in_pid tmh;
 Tmh=0;
 
-if (isempty(init_server))
+if (isempty(init_server) || input(3)==0)
     init_server = 0;
     init_nodes = 0;
 end
@@ -23,21 +23,20 @@ if uaClient.isConnected == 1 && init_nodes == 0
     var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
     % Inputs
     dlh_ref = findNodeByName(var_node_in,'dlh_ref','-once');
-    dlh_in = findNodeByName(var_node_in,'dlh_in_pid','-once');
+    dlh_in_pid = findNodeByName(var_node_in,'dlh_in_pid','-once');
     % Outputs
     tmh = findNodeByName(var_node_in,'tmh','-once');
-    disp(tmh);
 end
 
 if uaClient.isConnected == 1 && init_nodes == 1
     % Read values from OPC server (CODESYS)
     [Tmh,~,~]= readValue(uaClient,tmh);
     % Write values to OPC server (CODESYS)
-    writeValue(uaClient,dlh_in,input(1));
-    writeValue(uaClient,dlh_ref,input(2));
+    writeValue(uaClient,dlh_ref,input(1));
+    writeValue(uaClient,dlh_in_pid,input(2));
     disp(input(1));
 end
 
-output_data = double([Tmh,0]);
+output_data = double(Tmh);
 
 end
