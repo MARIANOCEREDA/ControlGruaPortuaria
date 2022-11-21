@@ -17,7 +17,6 @@ if init_server == 0
     connect(uaClient,'facundo', 'facundo');
 end
 if uaClient.isConnected == 1 && init_nodes == 0
-    disp("1")
     init_nodes = 1;
     % OPC nodes
     var_node_in = findNodeByName(uaClient.Namespace,'GLOBALS','-once');
